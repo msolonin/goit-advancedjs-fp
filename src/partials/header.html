@@ -1,19 +1,49 @@
 <header class="header">
-  <div class="container">
-    <nav class="nav">
-      <a class="nav-logo" href="./index.html" aria-label="Site logo">
-        <svg class="nav-logo-icon" width="100" height="30">
-          <use href="{=$icon-path}"></use>
-        </svg>
-      </a>
-      <ul class="nav-list">
-        <li class="nav-item">
-          <a class="nav-link {=$highlight-act}" href="./page-2.html">Page 2</a>
+  <div class="container header-wrapper">
+    <a class="logo on-hover js-logo" href="./index.html" aria-label="your energy logo">
+      <svg class="main-logo">
+        <use href="./img/main-logo.svg#main-logo"></use>
+      </svg>
+    </a>
+
+    <div class="toggle-bar">
+      <a href="/src/index.html" class="nav-link home-nav-link">Home</a>
+      <a href="/src/favorite.html" class="nav-link fav-nav-link">Favorites</a>
+    </div>
+
+    <div class="socials">
+      <ul class="social-icons-ul list">
+        <li class="social-icon-li">
+          <a class="social-icon-link" href="https://www.facebook.com/goITclub/" aria-label="Go to our facebook page"
+            target="_blank">
+            <svg class="social-icon" width="40" height="40">
+              <use href="./img/icons.svg#icon-facebook"></use>
+            </svg>
+          </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link {=$highlight-curr}" href="./page-3.html">Page 3</a>
+        <li class="social-icon-li">
+          <a class="social-icon-link" href="https://www.instagram.com/goitclub/" aria-label="Go to our instagram page"
+            target="_blank">
+            <svg class="social-icon" width="40" height="40">
+              <use href="./img/icons.svg#icon-instagram"></use>
+            </svg>
+          </a>
+        </li>
+        <li class="social-icon-li">
+          <a class="social-icon-link" href="https://www.youtube.com/c/GoIT" aria-label="Go to our youtube page"
+            target="_blank">
+            <svg class="social-icon" width="40" height="40">
+              <use href="./img/icons.svg#icon-youtube"></use>
+            </svg>
+          </a>
         </li>
       </ul>
-    </nav>
+    </div>
+
+    <button class="menu-btn on-hover js-open-menu" aria-controls="mob-menu" aria-label="Open menu button">
+      <svg class="menu-icon" width="32" height="32">
+        <use href="./img/icons.svg#icon-burger"></use>
+      </svg>
+    </button>
   </div>
 </header>
