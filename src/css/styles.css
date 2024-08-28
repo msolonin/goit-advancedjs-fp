@@ -4,17 +4,15 @@
   | default @import url()
   |============================
 */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz@0,9..40;1,9..40&display=swap');
-
 /* Common styles */
 @import url('./reset.css');
 @import url('./base.css');
-@import url('./variables.css');
+@import url('./container.css');
+@import url('./animations.css');
 
 /* Sections style */
 @import url('./header.css');
-@import url('./hero.css');
-@import url('./filters.css');
-@import url('./article-bar.css');
-@import url('./gallery.css');
+@import url('./vite-promo.css');
+@import url('./badges.css');
+@import url('./back-link.css');
 @import url('./footer.css');
