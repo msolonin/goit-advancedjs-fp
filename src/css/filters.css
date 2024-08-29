@@ -1,0 +1,94 @@
+/* For mobile devices */
+.filters-container {
+  margin-top: 40px;
+}
+
+.filter-title {
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+.filter-button-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.filter-button {
+  /* reset style for button so it's simple text */
+  background: none;
+  border: 0px;
+  padding: 0;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42;
+}
+
+.filter-item {
+  display: inline-block;
+  position: relative;
+  padding-bottom: 8px;
+}
+
+.filter-button-active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
+}
+
+.filter-item {
+  display: flex;
+}
+
+/* For tablets */
+@media (min-width: 768px) and (max-width: 1439px) {
+  .filters-container {
+    margin-top: 64px;
+  }
+
+  .filter-button-list {
+    margin-top: 32px;
+  }
+
+  .filter-title {
+    font-size: 44px;
+    line-height: 1.09;
+  }
+
+  .filter-button {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
+
+/* For desktop */
+@media (min-width: 1440px) {
+  .filters-container {
+    margin-top: 64px;
+  }
+
+  .filters-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .filter-title {
+    font-size: 44px;
+    line-height: 1.09;
+  }
+
+  .filter-button {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+}
