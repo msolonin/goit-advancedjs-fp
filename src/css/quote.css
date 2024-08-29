@@ -1,0 +1,107 @@
+.quote {
+  display: flex;
+  margin: 0;
+  background-color: #242424;
+  color: #f4f4f4;
+  border-radius: 20px;
+  padding: 20px;
+
+  max-width: 535px;
+}
+
+@media screen and (min-width: 768px) {
+  .quote {
+    padding: 40px;
+  }
+}
+
+.quote-content {
+  flex: 1;
+}
+
+.quote-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(244, 244, 244, 0.2);
+  margin-right: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .quote-icon {
+    margin-right: 18px;
+  }
+}
+
+.quote-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+@media screen and (min-width: 768px) {
+  .quote-header {
+    margin-bottom: 6px;
+  }
+}
+
+.quote-title {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .quote-title {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}
+
+.quote-decor {
+  display: inline-block;
+  margin-left: 20px;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  top: -2px;
+}
+
+@media screen and (min-width: 768px) {
+  .quote-decor {
+    width: 24px;
+    height: 24px;
+    top: -5px;
+  }
+}
+
+.quote-desc {
+  font-size: 14px;
+  line-height: 18px;
+  color: rgba(244, 244, 244, 0.6);
+}
+
+.quote-author {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+@media screen and (min-width: 768px) {
+  .quote-author {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .quote-author {
+    margin-top: 8px;
+  }
+}
