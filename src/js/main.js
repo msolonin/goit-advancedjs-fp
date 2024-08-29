@@ -1,4 +1,5 @@
 import { request } from './services/api-service';
+import './mobile-menu';
 
 const filterButtons = document.querySelectorAll('.filter-button');
 
