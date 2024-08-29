@@ -1,48 +1,46 @@
 import { request } from './services/api-service';
 
 const BACKUP_QUOTE = {
-  quote:
-    'Unfortunately, there was an error on the server, but as they say: "Even in failure, wisdom finds its voice."',
+  text: 'Unfortunately, there was an error on the server, but as they say: "Even in failure, wisdom finds its voice."',
   author: 'Team "Your Enegry"',
 };
 
 (async () => {
   const quoteFromStorage = getQuoteFromStorage();
-
-  let quote = BACKUP_QUOTE.quote;
-  let author = BACKUP_QUOTE.author;
+  const quote = {
+    text: BACKUP_QUOTE.text,
+    author: BACKUP_QUOTE.author,
+  };
 
   if (
-    validateStorageQuote(quoteFromStorage) &&
+    isQuoteFromStorageValid(quoteFromStorage) &&
     isTodayDate(quoteFromStorage.date)
   ) {
-    quote = quoteFromStorage.quote;
-    author = quoteFromStorage.author;
+    quote.text = quoteFromStorage.text;
+    quote.author = quoteFromStorage.author;
   } else {
     try {
-      const response = await request('quote');
-      quote = response.quote;
-      author = response.author;
-      localStorage.setItem(
-        'quote',
-        JSON.stringify({ ...response, date: new Date() })
-      );
+      await fetchAndSaveQuote(quote);
     } catch (error) {
       console.log(error);
     }
   }
 
-  renderQuote(quote, author);
+  renderQuote(quote);
 })();
 
-function renderQuote(quote, author) {
-  const quoteNode = document.querySelector('.quote-desc');
-  const authorNode = document.querySelector('.quote-author');
-
-  quoteNode.textContent = quote;
-  authorNode.textContent = author;
-  quoteNode.classList.remove('skeleton');
-  authorNode.classList.remove('skeleton');
+async function fetchAndSaveQuote(quote) {
+  const response = await request('quote');
+  quote.text = response.quote;
+  quote.author = response.author;
+  localStorage.setItem(
+    'quote',
+    JSON.stringify({
+      text: response.quote,
+      author: response.author,
+      date: new Date(),
+    })
+  );
 }
 
 function getQuoteFromStorage() {
@@ -57,10 +55,20 @@ function getQuoteFromStorage() {
   return quoteFromStorage;
 }
 
-function validateStorageQuote(quote) {
+function renderQuote(quote) {
+  const quoteNode = document.querySelector('.quote-desc');
+  const authorNode = document.querySelector('.quote-author');
+
+  quoteNode.textContent = quote.text;
+  authorNode.textContent = quote.author;
+  quoteNode.classList.remove('skeleton');
+  authorNode.classList.remove('skeleton');
+}
+
+function isQuoteFromStorageValid(quote) {
   return (
     quote &&
-    typeof quote?.quote === 'string' &&
+    typeof quote?.text === 'string' &&
     typeof quote?.author === 'string' &&
     typeof quote?.date === 'string'
   );
