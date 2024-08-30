@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>YourEnergy - Favorites</title>
-    <script type="module" crossorigin src="/goit-advancedjs-fp/assets/vendor-CR7N1gwd.js"></script>
-    <script type="module" crossorigin src="/goit-advancedjs-fp/assets/main-DSSRAZwo.js"></script>
-    <link rel="stylesheet" crossorigin href="/goit-advancedjs-fp/assets/main-C00JbAdI.css">
-  </head>
-  <body>
-    <header class="header">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YourEnergy - Favorites</title>
+  <script type="module" crossorigin src="/goit-advancedjs-fp/favorite.js"></script>
+  <link rel="modulepreload" crossorigin href="/goit-advancedjs-fp/assets/vendor-CR7N1gwd.js">
+  <link rel="modulepreload" crossorigin href="/goit-advancedjs-fp/assets/main-DJiQxdCO.js">
+  <link rel="stylesheet" crossorigin href="/goit-advancedjs-fp/assets/main-l6nZUB9G.css">
+</head>
+
+<body>
+  <header class="header">
   <div class="container header-wrapper">
     <a
       class="logo mobile-logo"
@@ -29,7 +32,7 @@
       aria-label="Open menu button"
     >
       <svg class="menu-btn-icon" width="32" height="32">
-        <use href="/goit-advancedjs-fp/assets/icons-Dk8HFH71.svg#icon-burger"></use>
+        <use href="/goit-advancedjs-fp/assets/icons-CObedbc7.svg#icon-burger"></use>
       </svg>
     </button>
 
@@ -41,7 +44,7 @@
         aria-label="Close menu button"
       >
         <svg class="menu-btn-icon" width="32" height="32">
-          <use href="/goit-advancedjs-fp/assets/icons-Dk8HFH71.svg#icon-close"></use>
+          <use href="/goit-advancedjs-fp/assets/icons-CObedbc7.svg#icon-close"></use>
         </svg>
       </button>
 
@@ -75,7 +78,7 @@
             target="_blank"
           >
             <svg class="social-icon" width="28" height="28">
-              <use href="/goit-advancedjs-fp/assets/icons-Dk8HFH71.svg#icon-facebook"></use>
+              <use href="/goit-advancedjs-fp/assets/icons-CObedbc7.svg#icon-facebook"></use>
             </svg>
           </a>
         </li>
@@ -87,7 +90,7 @@
             target="_blank"
           >
             <svg class="social-icon" width="28" height="28">
-              <use href="/goit-advancedjs-fp/assets/icons-Dk8HFH71.svg#icon-instagram"></use>
+              <use href="/goit-advancedjs-fp/assets/icons-CObedbc7.svg#icon-instagram"></use>
             </svg>
           </a>
         </li>
@@ -99,7 +102,7 @@
             target="_blank"
           >
             <svg class="social-icon" width="28" height="28">
-              <use href="/goit-advancedjs-fp/assets/icons-Dk8HFH71.svg#icon-youtube"></use>
+              <use href="/goit-advancedjs-fp/assets/icons-CObedbc7.svg#icon-youtube"></use>
             </svg>
           </a>
         </li>
@@ -108,25 +111,26 @@
   </div>
 </header>
 
-    <main>
-      <div class="container">
-        <h1 class="main-title">
-          <span class="main-title-gradient">Welcome</span> to page 2
-        </h1>
+  <main>
+    <div class="container">
+      <h1 class="main-title">
+        <span class="main-title-gradient">Favorites</span>
+      </h1>
 
+      <div class="exercises-cards-wrapper">
         <div class="favorite-article-bar">
           <!-- QUOTE START -->
 <blockquote class="quote">
   <div class="quote-icon">
     <svg width="18" height="20">
-      <use href="/goit-advancedjs-fp/assets/icons-Dk8HFH71.svg#icon-run"></use>
+      <use href="/goit-advancedjs-fp/assets/icons-CObedbc7.svg#icon-run"></use>
     </svg>
   </div>
   <div class="quote-content">
     <div class="quote-header">
       <strong class="quote-title">Quote of the day</strong>
       <svg class="quote-decor" width="24" height="24">
-        <use href="/goit-advancedjs-fp/assets/icons-Dk8HFH71.svg#icon-quote"></use>
+        <use href="/goit-advancedjs-fp/assets/icons-CObedbc7.svg#icon-quote"></use>
       </svg>
     </div>
     <p class="quote-desc skeleton"></p>
@@ -140,7 +144,7 @@
 <article class="info info-small">
   <div class="info-icon">
     <svg width="20" height="20">
-      <use href="/goit-advancedjs-fp/assets/icons-Dk8HFH71.svg#icon-gym"></use>
+      <use href="/goit-advancedjs-fp/assets/icons-CObedbc7.svg#icon-gym"></use>
     </svg>
   </div>
   <div class="info-content">
@@ -193,15 +197,38 @@
 
           </div>
         </div>
+
+        <ul id="favorites-container" class="exercises-cards favorites-grid">
+          <!-- Exercise cards will be here -->
+        </ul>
+
+        <div id="no-favorites" class="no-favorites-message">
+          <p>It appears that you haven't added any exercises to your favorites yet. To get started, you can add
+            exercises
+            that you like to your favorites for easier access in the future.</p>
+        </div>
+
+        <div class="pagination"></div>
+
+        <!-- todo: export correct modal -->
+        <div id="exercise-modal" class="modal">
+          <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="modal-title">title</h2>
+            <p id="modal-details">info exercise.</p>
+          </div>
+        </div>
       </div>
-    </main>
-    <div class="scroll-up-container">
+    </div>
+  </main>
+  <div class="scroll-up-container">
   <div class="scroll-up-button">
   </div>
 </div>
 
-    
+  
 
 
-  </body>
+</body>
+
 </html>
