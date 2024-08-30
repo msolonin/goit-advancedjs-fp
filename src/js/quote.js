@@ -5,29 +5,27 @@ const BACKUP_QUOTE = {
   author: 'Team "Your Enegry"',
 };
 
-(async () => {
-  const quoteFromStorage = getQuoteFromStorage();
-  const quote = {
-    text: BACKUP_QUOTE.text,
-    author: BACKUP_QUOTE.author,
-  };
+const quoteFromStorage = getQuoteFromStorage();
+const quote = {
+  text: BACKUP_QUOTE.text,
+  author: BACKUP_QUOTE.author,
+};
 
-  if (
-    isQuoteFromStorageValid(quoteFromStorage) &&
-    isTodayDate(quoteFromStorage.date)
-  ) {
-    quote.text = quoteFromStorage.text;
-    quote.author = quoteFromStorage.author;
-  } else {
-    try {
-      await fetchAndSaveQuote(quote);
-    } catch (error) {
-      console.log(error);
-    }
+if (
+  isQuoteFromStorageValid(quoteFromStorage) &&
+  isTodayDate(quoteFromStorage.date)
+) {
+  quote.text = quoteFromStorage.text;
+  quote.author = quoteFromStorage.author;
+} else {
+  try {
+    await fetchAndSaveQuote(quote);
+  } catch (error) {
+    console.log(error);
   }
+}
 
-  renderQuote(quote);
-})();
+renderQuote(quote);
 
 async function fetchAndSaveQuote(quote) {
   const response = await request('quote');
