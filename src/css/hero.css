@@ -88,7 +88,7 @@
 
 .hero-tags li {
   display: block;
-  border: 1px solid #242424;
+  border: 1px solid var(--primary-color);
   border-radius: 30px;
   font-size: 14px;
   line-height: 18px;
