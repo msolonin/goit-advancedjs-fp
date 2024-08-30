@@ -1,0 +1,26 @@
+.article-bar-img {
+  display: block;
+  border-radius: 20px;
+  margin-top: 20px;
+  overflow: hidden;
+  grid-area: box2;
+}
+
+@media (min-width: 768px) {
+  .article-bar-img {
+    margin-top: 0;
+    align-self: start;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .article-bar-img {
+    margin-top: 32px;
+  }
+}
+
+.article-bar-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
