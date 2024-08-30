@@ -1,18 +1,24 @@
 import { GetFavorites, AddToFavorites, RemoveFromFavorites } from "./utils/local-storage.js";
 import { request } from "./services/api-service.js";
 
-const btnOpenModal = document.querySelector("[data-modal-open]");
+const btnOpenModal = document.querySelectorAll("[data-modal-open]");
 const btnCloseModal = document.querySelector("[data-modal-close]");
 const modalWindow = document.querySelector(".modal"); // Modal without backdrop
 const modal = document.querySelector("[data-modal]"); // Modal with backdrop
 
-const exerciseID = '64f389465ae26083f39b18d7'; // ID of the exercise TEST
+// let exerciseID = '64f389465ae26083f39b18d7'; // ID of the exercise TEST
+for (let i = 0; i < btnOpenModal.length; i++) {
+    btnOpenModal[i].addEventListener("click", (event) => {
+        const btn = event.target;
+        const exerciseID = btn.value;
+        LoadData(exerciseID);
+    });  
+}
 
-(async () => {
+async function LoadData(exerciseID) {
     const exerciseData = await request(`exercises/${exerciseID}`);
     LoadElementsData(exerciseData);
-
-
+    
     // Add to favorites btn functions
     const btnAddFavorites = document.querySelector(".btn-modal-add-fav");
     
@@ -26,7 +32,7 @@ const exerciseID = '64f389465ae26083f39b18d7'; // ID of the exercise TEST
     
     btnAddFavorites.addEventListener("click", (event) => {
         btnAddFavorites.classList.toggle("fav-added");
-    
+        
         if (btnAddFavorites.classList.contains("fav-added")) {
             AddToFavorites(exerciseID);
             document.querySelector(".btn-fav-text").textContent = "Remove from favorites";
@@ -38,7 +44,10 @@ const exerciseID = '64f389465ae26083f39b18d7'; // ID of the exercise TEST
             document.querySelector(".icon-fav-btn-use").setAttribute("href", "./img/icons.svg#icon-heart");
         }
     })
-})();
+
+    modal.classList.toggle("hidden");
+    OnOpen();
+};
 
 function LoadElementsData(exerciseData) {
     document.querySelector(".img-modal-exercise").src = exerciseData.gifUrl;
@@ -63,6 +72,7 @@ function LoadElementsData(exerciseData) {
     // Stats
     const statsList = document.querySelector(".stats-list");
     statsList.innerHTML = "";
+    innerHTMLStats = "";
     if(exerciseData.target !== "")
         AddStat("Target", exerciseData.target);
     if(exerciseData.bodyPart !== "")
@@ -76,7 +86,7 @@ function LoadElementsData(exerciseData) {
     statsList.insertAdjacentHTML("beforeend", innerHTMLStats);
 }
 
-let innerHTMLStats = '';
+let innerHTMLStats = "";
 function AddStat(title, value) {
     innerHTMLStats += `<li class="stats-item">
               <p class="stats-title">${title}</p>
@@ -86,12 +96,6 @@ function AddStat(title, value) {
 
 
 // Modal close functions
-btnOpenModal.addEventListener("click", () => {
-    modal.classList.toggle("hidden");
-    OnOpen();
-});
-
-
 btnCloseModal.addEventListener("click", () => {
     modal.classList.toggle("hidden");
     OnClose();

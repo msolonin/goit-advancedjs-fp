@@ -13,7 +13,7 @@ body.modal-open {
     position: fixed;
     inset: 0;
     background-color: var(--modal-backdrop);
-    transition: none;
+    transition: var(--tran-fast);
     transition-property: visibility, opacity;
     overflow: auto;
 }

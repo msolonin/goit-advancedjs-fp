@@ -24,7 +24,7 @@
 }
 
  /* need to delate and export correct modal */
-.modal {
+/* .modal {
   display: none; 
   position: fixed;
   top: 0;
@@ -35,9 +35,9 @@
   justify-content: center;
   align-items: center;
   z-index: 1000; 
-}
+} */
 
-.modal-content {
+/* .modal-content {
   background: #fff;
   padding: 20px;
   border-radius: 10px;
@@ -45,7 +45,7 @@
   width: 100%;
   text-align: center;
   position: relative;
-}
+} */
 
 .close-btn {
   position: absolute;
