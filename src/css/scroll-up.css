@@ -7,4 +7,5 @@
 
 .scroll-up-button {
     visibility: hidden;
+    cursor: pointer;
 }
