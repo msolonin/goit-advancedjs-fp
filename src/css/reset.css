@@ -25,6 +25,7 @@ button {
   color: currentColor;
   cursor: pointer;
   border: 0;
+  padding: 0;
 }
 
 address {

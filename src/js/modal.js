@@ -88,13 +88,13 @@ function AddStat(title, value) {
 // Modal close functions
 btnOpenModal.addEventListener("click", () => {
     modal.classList.toggle("hidden");
-    document.addEventListener("keydown", escapeKeyDown);
+    OnOpen();
 });
 
 
 btnCloseModal.addEventListener("click", () => {
     modal.classList.toggle("hidden");
-    document.removeEventListener("keydown", escapeKeyDown);
+    OnClose();
 });
 
 modal.addEventListener("click", (event) => {
@@ -104,15 +104,27 @@ modal.addEventListener("click", (event) => {
     rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
     if (!isInWindow) {
         modal.classList.toggle("hidden");
-        document.removeEventListener("keydown", escapeKeyDown);
+        OnClose();
     }
 });
 
 function escapeKeyDown(event) {
     if (event.key === "Escape") {
         modal.classList.add("hidden");
-        document.removeEventListener("keydown", escapeKeyDown);
+        OnClose();
     }
+}
+
+function OnOpen() {
+    document.addEventListener("keydown", escapeKeyDown);
+    document.querySelector("body").classList.add("modal-open");
+    document.querySelector('.scroll-up-button').style.visibility = 'hidden';
+}
+
+function OnClose() {
+    document.removeEventListener("keydown", escapeKeyDown);
+    document.querySelector("body").classList.remove("modal-open");
+    document.querySelector('.scroll-up-button').style.visibility = 'visible';
 }
 
 
