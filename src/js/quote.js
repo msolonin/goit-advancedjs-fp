@@ -5,6 +5,7 @@ const BACKUP_QUOTE = {
   author: 'Team "Your Enegry"',
 };
 
+// Main
 const quoteFromStorage = getQuoteFromStorage();
 const quote = {
   text: BACKUP_QUOTE.text,
@@ -27,6 +28,7 @@ if (
 
 renderQuote(quote);
 
+// Utils
 async function fetchAndSaveQuote(quote) {
   const response = await request('quote');
   quote.text = response.quote;
