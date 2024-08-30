@@ -7,15 +7,54 @@ const searchForm = document.querySelector('#search-form');
 const searchInput = document.querySelector('#filter-search');
 const clearButton = document.querySelector('.button-clear');
 const filterPagination = document.querySelector('.filter-pagination');
+const filterTitle = document.querySelector('.filter-title');
 
 let requestBase = { path: 'filters', params: { filter: 'Muscles' } };
 let filterPage = 1;
 let filterLimit = 9;
 let lastResolution = currentResolution;
+let currentExercisesName = '';
+let filterSelectedCategory = '';
 
-function drawFilterContent(data) {
-  // TODO: Draw the content based on the data
+function drawCategories(data) {
   console.log(data);
+  const categoriesContainer = document.querySelector('.category-items');
+  categoriesContainer.innerHTML = '';
+
+  data.results.forEach(category => {
+    let li = document.createElement('li');
+    let divItem = document.createElement('div');
+    li.classList.add('category-item');
+    li.style.backgroundImage = `url(${category.imgURL})`;
+
+    let categoryText = document.createElement('p');
+    categoryText.innerHTML =
+      category.name.charAt(0).toUpperCase() + category.name.slice(1);
+    categoryText.classList.add('filter-category');
+    divItem.appendChild(categoryText);
+
+    let filterText = document.createElement('p');
+    filterText.innerHTML =
+      category.filter.charAt(0).toUpperCase() + category.filter.slice(1);
+    filterText.classList.add('filter-text');
+    divItem.appendChild(filterText);
+
+    li.addEventListener('click', () => {
+      categoriesContainer.innerHTML = '';
+      categoriesContainer.style.display = 'none';
+      filterSelectedCategory = category.name;
+      handleSearch();
+    });
+
+    li.appendChild(divItem);
+    categoriesContainer.appendChild(li);
+  });
+}
+
+function drawContent(data) {
+  if (filterTitle.innerHTML === 'Exercises') {
+    drawCategories(data);
+  }
 }
 
 // Process the current request
@@ -27,26 +66,22 @@ async function processCurrentRequest(shouldDraw = true) {
   };
   const data = await request(requestBase.path, params);
   if (shouldDraw) {
-    drawFilterContent(data);
+    drawContent(data);
   }
   return data;
 }
 
 function updateTitle() {
-  const title = document.querySelector('.filter-title');
-  if (requestBase.path === 'filters') {
-    const selectedCategory = getSelectedCategory();
+  const selectedCategory = getSelectedCategory();
 
-    title.innerHTML = `Exercises ${
-      selectedCategory ? '/ ' + `<span>${selectedCategory}</span>` : ''
-    }`;
-  }
+  filterTitle.innerHTML = `Exercises${
+    selectedCategory ? ' / ' + `<span>${selectedCategory}</span>` : ''
+  }`;
 }
 
 function getSelectedCategory() {
   // TODO: Replace this with the actual logic to get the selected category
-  const selectedCategory = 'abs';
-  return selectedCategory;
+  return filterSelectedCategory;
 }
 
 function updateActivePaginationButton() {
@@ -104,16 +139,30 @@ async function drawPagination() {
 }
 
 function calculateFilterLimit() {
-  switch (currentResolution) {
-    case 0:
-      filterLimit = 9;
-      break;
-    case 1:
-      filterLimit = 12;
-      break;
-    case 2:
-      filterLimit = 12;
-      break;
+  if (filterTitle.innerHTML === 'Exercises') {
+    switch (currentResolution) {
+      case 0:
+        filterLimit = 9;
+        break;
+      case 1:
+        filterLimit = 12;
+        break;
+      case 2:
+        filterLimit = 12;
+        break;
+    }
+  } else {
+    switch (currentResolution) {
+      case 0:
+        filterLimit = 8;
+        break;
+      case 1:
+        filterLimit = 10;
+        break;
+      case 2:
+        filterLimit = 10;
+        break;
+    }
   }
 }
 
@@ -181,24 +230,24 @@ clearButton.addEventListener('click', () => {
 const handleSearch = async () => {
   const searchQuery = searchInput.value.trim();
 
+  const selectedGroup = document.querySelector('.filter-button-active').value;
+  const selectedCategory = getSelectedCategory();
+
+  const searchParams = {
+    [selectedGroup]: selectedCategory,
+  };
   if (searchQuery !== '') {
-    const selectedGroup = document.querySelector('.filter-button-active').value;
-    const selectedCategory = getSelectedCategory();
-
-    const searchParams = {
-      keyword: searchQuery,
-      [selectedGroup]: selectedCategory,
-    };
-
-    filterPage = 1;
-
-    const exercises = await request('exercises', searchParams);
-
-    renderExercises(exercises, false);
-
-    searchInput.value = '';
-    toggleClearButton();
+    searchParams.keyword = searchQuery;
   }
+
+  filterPage = 1;
+
+  const exercises = await request('exercises', searchParams);
+
+  renderExercises(exercises, false);
+
+  searchInput.value = '';
+  toggleClearButton();
 };
 
 searchInput.addEventListener('input', () => {
