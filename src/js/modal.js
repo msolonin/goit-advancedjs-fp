@@ -72,7 +72,7 @@ function LoadElementsData(exerciseData) {
     if(exerciseData.popularity !== "")
         AddStat("Popular", exerciseData.popularity);
     if(exerciseData.burnedCalories !== "")
-        AddStat("Burned Calories", exerciseData.burnedCalories);
+        AddStat("Burned Calories", exerciseData.burnedCalories + "/" + exerciseData.time + " min");
     statsList.insertAdjacentHTML("beforeend", innerHTMLStats);
 }
 
