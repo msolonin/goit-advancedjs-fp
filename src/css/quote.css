@@ -6,6 +6,7 @@
   border-radius: 20px;
   padding: 20px;
 
+  grid-area: box1;
   max-width: 535px;
 }
 
