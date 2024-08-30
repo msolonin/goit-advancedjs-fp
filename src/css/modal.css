@@ -1,4 +1,8 @@
 /* General styles for modal */
+body.modal-open {
+    overflow: hidden;
+}
+
 .hidden {
     opacity: 0;
     visibility: hidden;
@@ -11,17 +15,19 @@
     background-color: var(--modal-backdrop);
     transition: none;
     transition-property: visibility, opacity;
+    overflow: auto;
 }
 
 .modal {
     position: absolute;
-    top: 50%;
+    top: 0;
     left: 50%;
-    transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%);
     padding: 40px 20px;
     background-color: var(--primary-color);
     border-radius: 20px;
-    width: 335px;
+    max-width: 335px;
+    min-width: 320px;
     color: var(--white-color);
 }
 
@@ -34,8 +40,8 @@
     justify-content: center;
     align-items: center;
     background-color: transparent;
-    width: 18px;
-    height: 18px;
+    width: 24px;
+    height: 24px;
 
 }
 
