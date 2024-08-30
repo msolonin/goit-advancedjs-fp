@@ -1,4 +1,5 @@
 import { request } from './services/api-service';
+import { initScrollUpButton } from './scroll-up.js';
 
 const filterButtons = document.querySelectorAll('.filter-button');
 const filterPagination = document.querySelector('.filter-pagination');
@@ -26,7 +27,7 @@ function updateResolution() {
 }
 updateResolution();
 addEventListener('resize', updateResolution);
-
+initScrollUpButton(currentResolution);
 function drawFilterContent(data) {
   // TODO: Draw the content based on the data
   console.log(data);
