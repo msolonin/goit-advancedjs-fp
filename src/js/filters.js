@@ -1,5 +1,5 @@
 import { request } from './services/api-service';
-import { initScrollUpButton } from './scroll-up.js';
+import { currentResolution } from './utils/utils.js';
 
 const filterButtons = document.querySelectorAll('.filter-button');
 const filterPagination = document.querySelector('.filter-pagination');
@@ -7,27 +7,8 @@ const filterPagination = document.querySelector('.filter-pagination');
 let requestBase = { path: 'filters', params: { filter: 'Muscles' } };
 let filterPage = 1;
 let filterLimit = 9;
-let currentResolution = 0;
+let lastResolution = currentResolution;
 
-function updateResolution() {
-  const prevResolution = currentResolution;
-  if (
-    window.matchMedia('(min-width: 768px)').matches &&
-    window.matchMedia('(max-width: 1439px)').matches
-  ) {
-    currentResolution = 1;
-  } else if (window.matchMedia('(min-width: 1439px)').matches) {
-    currentResolution = 2;
-  } else {
-    currentResolution = 0;
-  }
-  if (prevResolution !== currentResolution) {
-    console.log('TODO: Redraw the page based on the new resolution');
-  }
-}
-updateResolution();
-addEventListener('resize', updateResolution);
-initScrollUpButton(currentResolution);
 function drawFilterContent(data) {
   // TODO: Draw the content based on the data
   console.log(data);
@@ -64,10 +45,10 @@ function updateActivePaginationButton() {
   });
 }
 
-const handlePaginationButtonClick = async (btn, force_process = false) => {
+const handlePaginationButtonClick = async (btn, forceProcess = false) => {
   // Do not process the request if the button is already active
   if (
-    !force_process &&
+    !forceProcess &&
     btn.classList.contains('filters-pagination-button-active')
   ) {
     return;
@@ -108,23 +89,26 @@ async function drawPagination() {
   );
 }
 
+function calculateFilterLimit() {
+  switch (currentResolution) {
+    case 0:
+      filterLimit = 9;
+      break;
+    case 1:
+      filterLimit = 12;
+      break;
+    case 2:
+      filterLimit = 12;
+      break;
+  }
+}
+
 const handleFilterButtonClick = async btn => {
   filterPage = 1;
   // Get filter
   const filter = btn.innerHTML;
   // Get limit
-  let limit = 9;
-  switch (currentResolution) {
-    case 0:
-      limit = 9;
-      break;
-    case 1:
-      limit = 12;
-      break;
-    case 2:
-      limit = 12;
-      break;
-  }
+  calculateFilterLimit();
   // Remove filter-button-active for all buttons
   filterButtons.forEach(btn => {
     btn.classList.remove('filter-button-active');
@@ -148,4 +132,14 @@ filterButtons.forEach(btn => {
 document.addEventListener('DOMContentLoaded', async () => {
   const musclesButton = document.querySelector('.filter-button-active');
   handleFilterButtonClick(musclesButton);
+});
+
+// Redraw on resolution change
+addEventListener('resize', async () => {
+  if (currentResolution === lastResolution) {
+    return;
+  }
+  lastResolution = currentResolution;
+  calculateFilterLimit();
+  await drawPagination();
 });

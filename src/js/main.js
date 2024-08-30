@@ -1,3 +1,3 @@
 import './header';
-import './filters';
 import './quote';
+import './scroll-up';
