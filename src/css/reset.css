@@ -24,6 +24,7 @@ button {
   font-family: inherit;
   color: currentColor;
   cursor: pointer;
+  border: 0;
 }
 
 address {
