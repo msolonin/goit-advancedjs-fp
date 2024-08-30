@@ -43,6 +43,13 @@ body.modal-open {
     }
 }
 
+@media screen and (min-width: 1440px) {
+    .modal {
+        min-width: 708px;
+        max-width: 708px;
+    }
+}
+
 /* Close button */
 .btn-modal-close {
     position: absolute;
@@ -93,6 +100,12 @@ body.modal-open {
 @media screen and (min-width: 768px) {
     .modal-info {
         width: 338px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .modal-info {
+        width: 342px;
     }
 }
 
