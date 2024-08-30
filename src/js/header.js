@@ -1,7 +1,10 @@
 const mobileMenu = document.querySelector('.js-mobile-menu');
 
 // Add active menu items
-const pathnamePage = window.location.pathname.split('/').pop();
+let pathnamePage = window.location.pathname.split('/').pop();
+if (pathnamePage === '') {
+  pathnamePage = 'index.html';
+}
 const currentPage = mobileMenu.querySelector(
   `.nav-link[href='./${pathnamePage}']`
 );
