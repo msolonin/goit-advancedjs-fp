@@ -1,0 +1,10 @@
+.scroll-up-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.scroll-up-button {
+    visibility: hidden;
+}
