@@ -1,0 +1,10 @@
+.article-bar {
+  max-width: 444px;
+}
+
+.article-bar-img {
+  display: block;
+  border-radius: 20px;
+  margin-top: 20px;
+  overflow: hidden;
+}
