@@ -1,0 +1,129 @@
+/* For mobile devices */
+.exercises-list {
+  display: flex;
+  flex-direction: column;
+  column-gap: 16px;
+  row-gap: 20px;
+  flex-wrap: wrap;
+}
+.exercise-card {
+  width: 100%;
+  height: 141px;
+  border-radius: 15px;
+  background: white;
+  padding: 16px;
+  cursor: pointer;
+}
+.exercise-header {
+  display: flex;
+  align-items: center;
+}
+.exercise-type {
+  padding: 5px 8px;
+  border-radius: 15px;
+  border: 1px solid #242424;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: normal;
+  width: 76px;
+  height: 26px;
+}
+.exercise-rating {
+  font-size: 12px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: 16px;
+}
+.icon-delete {
+    margin-left: 8px;
+}
+.button-start {
+  background: white;
+  margin-left: auto;
+  font-size: 16px;
+  line-height: 24px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.exercise-title {
+  margin-top: 25px;
+  margin-bottom: 16px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.exercise-title svg {
+    min-width: 24px;
+    min-height: 24px;
+}
+.exercise-title h3 {
+    font-size: 20px;
+  line-height:24px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.card-params {
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+  line-height: 18px;
+}
+.card-params > div {
+  min-width: 60px;
+  color: var(--title-secondary-color);
+  display: flex;
+  gap: 2px;
+}
+.card-params > div > p:first-child {
+    white-space: nowrap;
+    letter-spacing: -0.005px;
+}
+.card-params > div p:last-child  {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--primary-color);
+  letter-spacing: -0.005px;
+  word-spacing: -1.5px;
+  max-width: 43px;
+}
+.hidden {
+display: none;
+}
+
+/* For tablets */
+@media (min-width: 768px) {
+  .exercises-list {
+    flex-direction: row;
+    row-gap: 36px;
+  }
+  .exercise-card {
+    width: calc((100% - 16px) / 2);
+  }
+  .exercise-title {
+    margin-bottom: 8px;
+  }
+  .exercise-title h3 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .card-params > div {
+    gap: 4px;
+  }
+}
+
+/* For desktop */
+@media (min-width: 1440px) {
+  .exercise-card {
+    width: calc((100% - 16px) / 2);
+  }
+  .card-params {
+    gap: 16px;
+  }
+}

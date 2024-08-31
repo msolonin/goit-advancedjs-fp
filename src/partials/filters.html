@@ -1,20 +1,37 @@
 <div class="container filters-container">
   <div class="filters-header">
     <h2 class="filter-title">Exercises</h2>
-    <ul class="filter-button-list">
-      <li class="filter-item">
-        <button class="filter-button filter-button-active">Muscles</button>
-      </li>
-      <li class="filter-item">
-        <button class="filter-button">Body parts</button>
-      </li>
-      <li class="filter-item">
-        <button class="filter-button">Equipment</button>
-      </li>
-    </ul>
+
+    <div class="filters-wrapper">
+      <form id="search-form" class="search-wrapper">
+        <label for="filter-search" class="sr-only">Search Exercises</label>
+        <input id="filter-search" class="search-input" placeholder="Search" />
+        <button type="submit" class="button-search">
+          <svg class="icon-search" width="18" height="18">
+            <use href="./img/icons.svg#icon-search"></use>
+          </svg>
+        </button>
+        <button type="button" class="button-clear">
+          <svg class="icon-search" width="18" height="18">
+            <use href="./img/icons.svg#icon-clear-search"></use>
+          </svg>
+        </button>
+      </form>
+      <ul class="filter-button-list">
+        <li class="filter-item">
+          <button class="filter-button filter-button-active" value="muscles">
+            Muscles
+          </button>
+        </li>
+        <li class="filter-item">
+          <button class="filter-button" value="bodypart">Body parts</button>
+        </li>
+        <li class="filter-item">
+          <button class="filter-button" value="equipment">Equipment</button>
+        </li>
+      </ul>
+    </div>
   </div>
-  <ul class="filter-results"></ul>
-  <ul class="filter-pagination"></ul>
 </div>
 
 <script type="module" src="./js/filters.js"></script>
