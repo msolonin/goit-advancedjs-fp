@@ -11,6 +11,6 @@ export function AddToFavorites(exerciseID) {
 
 export function RemoveFromFavorites(exerciseID) {
     const favorites = JSON.parse(localStorage.getItem("favorites")) ?? [];
-    favorites.splice(favorites.indexOf(exerciseID));
+    favorites.splice(favorites.indexOf(exerciseID), 1);
     localStorage.setItem("favorites", JSON.stringify(favorites));
 }
