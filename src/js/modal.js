@@ -4,6 +4,7 @@ import { request } from "./services/api-service.js";
 const btnCloseModal = document.querySelector("[data-modal-close]");
 const modalWindow = document.querySelector(".modal"); // Modal without backdrop
 const modal = document.querySelector("[data-modal]"); // Modal with backdrop
+const btnAddFavorites = document.querySelector(".btn-modal-add-fav");
 
 let exerciseID = ''; // ID of the exercise
     // const btnOpenModal = document.querySelectorAll("[data-modal-open]");
@@ -14,24 +15,8 @@ let exerciseID = ''; // ID of the exercise
     //         LoadModalData(exerciseID);
     //     });  
     // }
-
-const btnAddFavorites = document.querySelector(".btn-modal-add-fav");
-btnAddFavorites.addEventListener("click", (event) => {
-    btnAddFavorites.classList.toggle("fav-added");
     
-    if (btnAddFavorites.classList.contains("fav-added")) {
-        AddToFavorites(exerciseID);
-        document.querySelector(".btn-fav-text").textContent = "Remove from favorites";
-        document.querySelector(".icon-fav-btn-use").setAttribute("href", "./img/icons.svg#icon-trash");
-    }
-    else {
-        RemoveFromFavorites(exerciseID);
-        document.querySelector(".btn-fav-text").textContent = "Add to favorites";
-        document.querySelector(".icon-fav-btn-use").setAttribute("href", "./img/icons.svg#icon-heart");
-    }
-});
-
-export async function LoadModalData(_id) {
+async function LoadModalData(_id) {
     exerciseID = _id;
     const exerciseData = await request(`exercises/${exerciseID}`);
     LoadElementsData(exerciseData);
@@ -50,11 +35,13 @@ export async function LoadModalData(_id) {
         document.querySelector(".btn-fav-text").textContent = "Add to favorites";
         document.querySelector(".icon-fav-btn-use").setAttribute("href", "./img/icons.svg#icon-heart");
     }
-    
+
+    AddBtnFavListener();
     
     modal.classList.toggle("hidden");
     OnOpen();
 };
+
 
 function LoadElementsData(exerciseData) {
     document.querySelector(".img-modal-exercise").src = exerciseData.gifUrl;
@@ -91,6 +78,28 @@ function LoadElementsData(exerciseData) {
     if(exerciseData.burnedCalories !== "")
         AddStat("Burned Calories", exerciseData.burnedCalories + "/" + exerciseData.time + " min");
     statsList.insertAdjacentHTML("beforeend", innerHTMLStats);
+
+}
+
+function AddBtnFavListener() {
+    btnAddFavorites.addEventListener("click", (event) => {
+        // event.preventDefault();
+        const btn = event.currentTarget;
+        btn.classList.toggle("fav-added");
+        
+        if (btn.classList.contains("fav-added")) {
+            AddToFavorites(exerciseID);
+            document.querySelector(".btn-fav-text").textContent = "Remove from favorites";
+            document.querySelector(".icon-fav-btn-use").setAttribute("href", "./img/icons.svg#icon-trash");
+        }
+        else {
+            RemoveFromFavorites(exerciseID);
+            document.querySelector(".btn-fav-text").textContent = "Add to favorites";
+            document.querySelector(".icon-fav-btn-use").setAttribute("href", "./img/icons.svg#icon-heart");
+        }
+
+        event.stopImmediatePropagation();
+    });
 }
 
 let innerHTMLStats = "";
@@ -101,6 +110,15 @@ function AddStat(title, value) {
             </li>`;
 }
 
+export function LoadListenersForOpenModal() {
+    const btnOpenModal = document.querySelectorAll("[data-modal-open]");
+    for (let i = 0; i < btnOpenModal.length; i++) {
+        btnOpenModal[i].addEventListener("click", (event) => {
+        const btn = event.currentTarget;
+            LoadModalData(btn.value);
+        });
+    }
+}
 
 // Modal close functions
 btnCloseModal.addEventListener("click", () => {
