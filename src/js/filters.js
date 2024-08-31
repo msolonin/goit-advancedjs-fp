@@ -1,6 +1,7 @@
 import { request } from './services/api-service';
 import { currentResolution } from './utils/utils.js';
 import { renderExercises } from './exercises.js';
+import { LoadModalData } from './modal.js';
 
 const filterButtons = document.querySelectorAll('.filter-button');
 const searchForm = document.querySelector('#search-form');
@@ -195,6 +196,7 @@ const handleSearch = async () => {
     const exercises = await request('exercises', searchParams);
 
     renderExercises(exercises, false);
+    LoadListenersForOpenModal();
 
     searchInput.value = '';
     toggleClearButton();
@@ -204,3 +206,13 @@ const handleSearch = async () => {
 searchInput.addEventListener('input', () => {
   toggleClearButton();
 });
+
+function LoadListenersForOpenModal() {
+  const btnOpenModal = document.querySelectorAll("[data-modal-open]");
+  for (let i = 0; i < btnOpenModal.length; i++) {
+    // console.log(btnOpenModal[i]);
+    btnOpenModal[i].addEventListener("click", (event) => {
+      const btn = event.currentTarget;
+      LoadModalData(btn.value);
+    });  
+  }}

@@ -1,4 +1,5 @@
 import { renderExercises } from './exercises.js';
+// import { LoadListenersForOpenModal } from './modal.js';
 
 document.addEventListener('DOMContentLoaded', function () {
   const noFavoritesMessage = document.getElementById('no-favorites');
@@ -44,16 +45,16 @@ document.addEventListener('DOMContentLoaded', function () {
     displayFavorites();
   }
 
-  cardList.addEventListener('click', function (event) {
-    if (event.target.classList.contains('exercises__name-btn')) {
-      const exercise = favorites.find(ex => ex._id == event.target.dataset.id);
-      openModal(exercise);
-    }
-  });
+  // cardList.addEventListener('click', function (event) {
+  //   if (event.target.classList.contains('exercises__name-btn')) {
+  //     const exercise = favorites.find(ex => ex._id == event.target.dataset.id);
+  //     openModal(exercise);
+  //   }
+  // });
 
-  closeModalBtn.addEventListener('click', function () {
-    modal.style.display = 'none';
-  });
+  // closeModalBtn.addEventListener('click', function () {
+  //   modal.style.display = 'none';
+  // });
 
   window.addEventListener('click', function (event) {
     if (event.target == modal) {

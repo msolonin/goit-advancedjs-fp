@@ -16,7 +16,7 @@ export const renderExercises = (exercises, deletable) => {
                 <svg width="16" height="16" class="${deletable ? 'visible' : 'hidden'} icon-delete">
                     <use href="../img/icons.svg#icon-trash"></use>
                 </svg>
-                <button class="button-start" data-modal-open value="64f389465ae26083f39b18d7">
+                <button class="button-start" data-modal-open value=${exercise._id}>
                     <p>Start</p>
                     <svg width="16" height="16">
                         <use href="../img/icons.svg#icon-arrow-start"></use>
