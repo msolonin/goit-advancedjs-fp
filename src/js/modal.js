@@ -1,19 +1,19 @@
 import { GetFavorites, AddToFavorites, RemoveFromFavorites } from "./utils/local-storage.js";
 import { request } from "./services/api-service.js";
 
-const btnOpenModal = document.querySelectorAll("[data-modal-open]");
 const btnCloseModal = document.querySelector("[data-modal-close]");
 const modalWindow = document.querySelector(".modal"); // Modal without backdrop
 const modal = document.querySelector("[data-modal]"); // Modal with backdrop
 
 let exerciseID = ''; // ID of the exercise
-for (let i = 0; i < btnOpenModal.length; i++) {
-    btnOpenModal[i].addEventListener("click", (event) => {
-        const btn = event.target;
-        exerciseID = btn.value;
-        LoadData(exerciseID);
-    });  
-}
+    // const btnOpenModal = document.querySelectorAll("[data-modal-open]");
+    // for (let i = 0; i < btnOpenModal.length; i++) {
+    //     btnOpenModal[i].addEventListener("click", (event) => {
+    //         const btn = event.target;
+    //         exerciseID = btn.value;
+    //         LoadModalData(exerciseID);
+    //     });  
+    // }
 
 const btnAddFavorites = document.querySelector(".btn-modal-add-fav");
 btnAddFavorites.addEventListener("click", (event) => {
@@ -31,7 +31,8 @@ btnAddFavorites.addEventListener("click", (event) => {
     }
 });
 
-async function LoadData(exerciseID) {
+export async function LoadModalData(_id) {
+    exerciseID = _id;
     const exerciseData = await request(`exercises/${exerciseID}`);
     LoadElementsData(exerciseData);
     
