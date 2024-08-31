@@ -1,21 +1,40 @@
 import { request } from './services/api-service';
 import { currentResolution } from './utils/utils.js';
+import { drawCategories } from './categories.js';
 
 const filterButtons = document.querySelectorAll('.filter-button');
 const filterPagination = document.querySelector('.filter-pagination');
 
-let requestBase = { path: 'filters', params: { filter: 'Muscles' } };
+export let requestBase = { path: 'filters', params: { filter: 'Muscles' } };
 let filterPage = 1;
 let filterLimit = 9;
 let lastResolution = currentResolution;
 
 function drawFilterContent(data) {
+  // Draw here
+}
+
+/* How to create a request for exercises
+  filterLimit = 8;
+  filterPage = 1;
+  requestBase = {};
+  requestBase.path = 'exercises';
   // TODO: Draw the content based on the data
-  console.log(data);
+  if (data.filter == 'Muscles') {
+    requestBase.muscles = data.name;
+  } else if (data.filter == 'Body Parts') {
+    requestBase.bodypart = data.name;
+  } else if (data.filter == 'Equipment') {
+    requestBase.equipment = data.name;
+  }
+  processCurrentRequest();*/
+
+function sth(card_data) {
+  let newPath = 'exercises';
 }
 
 // Process the current request
-async function processCurrentRequest(shouldDraw = true) {
+export async function processCurrentRequest(shouldDraw = true) {
   const params = {
     ...requestBase.params,
     page: filterPage,
