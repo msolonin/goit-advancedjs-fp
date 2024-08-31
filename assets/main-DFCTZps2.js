@@ -50,4 +50,4 @@ import{a as L}from"./vendor-CR7N1gwd.js";(function(){const o=document.createElem
         <path fill-rule="evenodd" clip-rule="evenodd" d="M51.6192 37.4778L51.6192 63.0059L48.9033 63.0059L48.9033 37.4778L36.1392 50.2419L34.2187 48.3214L50.2612 32.2789L66.3037 48.3214L64.3833 50.2419L51.6192 37.4778Z" fill="#F4F4F4" stroke="#F4F4F4" stroke-width="0.3"/>
     </svg>
 `,l=document.querySelector(".scroll-up-button");let m=a;function M(){window.scrollTo({top:0,behavior:"smooth"})}function g(){return window.pageYOffset===0||document.documentElement.scrollTop===0}function $(){g()?l.style.visibility="hidden":l.style.visibility="visible"}function y(){a===0?l.innerHTML=E:l.innerHTML=B}function O(){y(),l.addEventListener("click",M),window.addEventListener("scroll",$),g()&&(l.style.visibility="hidden")}O();addEventListener("resize",()=>{a!==m&&(m=a,y())});export{P as a,a as c,S as r};
-//# sourceMappingURL=main-DdjliE5t.js.map
+//# sourceMappingURL=main-DFCTZps2.js.map
