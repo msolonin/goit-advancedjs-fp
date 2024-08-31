@@ -1,6 +1,5 @@
 import { renderExercises } from './exercises.js';
 import { LoadListenersForOpenModal } from './modal.js';
-import { GetFavorites } from './utils/local-storage.js';
 
 document.addEventListener('DOMContentLoaded', function () {
   const noFavoritesMessage = document.getElementById('no-favorites');
@@ -21,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // localStorage.setItem('favorites', JSON.stringify(sampleFavoritesData.results));
   // localStorage.removeItem('favorites');
 
-  let favorites = GetFavorites();
+  let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
   function displayFavorites() {
     cardList.innerHTML = '';
@@ -30,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
       noFavoritesMessage.style.display = 'block';
     } else {
       noFavoritesMessage.style.display = 'none';
-      renderExercises({ results: favorites }, true);
+      cardList = renderExercises({ results: favorites }, true);
       LoadListenersForOpenModal();
     }
   }
