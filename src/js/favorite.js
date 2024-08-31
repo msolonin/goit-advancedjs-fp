@@ -1,97 +1,36 @@
+import { renderExercises } from './exercises.js';
+
 document.addEventListener('DOMContentLoaded', function () {
   const noFavoritesMessage = document.getElementById('no-favorites');
   const modal = document.getElementById('exercise-modal');
   const modalTitle = document.getElementById('modal-title');
   const modalDetails = document.getElementById('modal-details');
   const closeModalBtn = document.querySelector('.close-btn');
-  const paginationContainer = document.querySelector('.pagination');
-  const cardList = document.querySelector('#favorites-container');
+  const cardList = document.querySelector('.exercises-list');
 
-  const ITEMS_PER_PAGE = 6;
+  // const sampleFavoritesData = {
+  //   page: 1,
+  //   perPage: 10,
+  //   totalPages: 17,
+  //   results: [
+  //    {"_id":"64f389465ae26083f39b17a3","bodyPart":"waist","equipment":"body weight","gifUrl":"https://ftp.goit.study/img/power-pulse/gifs/0002.gif","name":"45° side bend","target":"abs","description":"This refers to your core muscles, which include the rectus abdominis, obliques, and transverse abdominis. They're essential for maintaining posture, stability, and generating force in many movements. Exercises that target the abs include crunches, leg raises, and planks.","rating":4.19,"burnedCalories":323,"time":3,"popularity":1829},{"_id":"64f389465ae26083f39b17a4","bodyPart":"waist","equipment":"body weight","gifUrl":"https://ftp.goit.study/img/power-pulse/gifs/0003.gif","name":"air bike","target":"abs","description":"This refers to your core muscles, which include the rectus abdominis, obliques, and transverse abdominis. They're essential for maintaining posture, stability, and generating force in many movements. Exercises that target the abs include crunches, leg raises, and planks.","rating":4.42,"burnedCalories":312,"time":3,"popularity":3357},{"_id":"64f389465ae26083f39b17a5","bodyPart":"waist","equipment":"body weight","gifUrl":"https://ftp.goit.study/img/power-pulse/gifs/0006.gif","name":"alternate heel touchers","target":"abs","description":"This refers to your core muscles, which include the rectus abdominis, obliques, and transverse abdominis. They're essential for maintaining posture, stability, and generating force in many movements. Exercises that target the abs include crunches, leg raises, and planks.","rating":3.79,"burnedCalories":116,"time":3,"popularity":9167},{"_id":"64f389465ae26083f39b17ac","bodyPart":"waist","equipment":"medicine ball","gifUrl":"https://ftp.goit.study/img/power-pulse/gifs/0014.gif","name":"assisted motion russian twist","target":"abs","description":"This refers to your core muscles, which include the rectus abdominis, obliques, and transverse abdominis. They're essential for maintaining posture, stability, and generating force in many movements. Exercises that target the abs include crunches, leg raises, and planks.","rating":3.57,"burnedCalories":212,"time":3,"popularity":652},{"_id":"64f389465ae26083f39b1935","bodyPart":"waist","equipment":"body weight","gifUrl":"https://ftp.goit.study/img/power-pulse/gifs/0464.gif","name":"front plank with twist","target":"abs","description":"This refers to your core muscles, which include the rectus abdominis, obliques, and transverse abdominis. They're essential for maintaining posture, stability, and generating force in many movements. Exercises that target the abs include crunches, leg raises, and planks.","rating":4.23,"burnedCalories":174,"time":3,"popularity":414},{"_id":"64f389465ae26083f39b1937","bodyPart":"waist","equipment":"body weight","gifUrl":"https://ftp.goit.study/img/power-pulse/gifs/0467.gif","name":"gorilla chin","target":"abs","description":"This refers to your core muscles, which include the rectus abdominis, obliques, and transverse abdominis. They're essential for maintaining posture, stability, and generating force in many movements. Exercises that target the abs include crunches, leg raises, and planks.","rating":3.8,"burnedCalories":105,"time":3,"popularity":282},{"_id":"64f389465ae26083f39b1947","bodyPart":"waist","equipment":"body weight","gifUrl":"https://ftp.goit.study/img/power-pulse/gifs/0495.gif","name":"incline twisting sit-up","target":"abs","description":"This refers to your core muscles, which include the rectus abdominis, obliques, and transverse abdominis. They're essential for maintaining posture, stability, and generating force in many movements. Exercises that target the abs include crunches, leg raises, and planks.","rating":3.17,"burnedCalories":229,"time":3,"popularity":374},{"_id":"64f389465ae26083f39b194f","bodyPart":"waist","equipment":"body weight","gifUrl":"https://ftp.goit.study/img/power-pulse/gifs/0508.gif","name":"janda sit-up","target":"abs","description":"This refers to your core muscles, which include the rectus abdominis, obliques, and transverse abdominis. They're essential for maintaining posture, stability, and generating force in many movements. Exercises that target the abs include crunches, leg raises, and planks.","rating":3.33,"burnedCalories":172,"time":3,"popularity":237},{"_id":"64f389465ae26083f39b17e3","bodyPart":"waist","equipment":"barbell","gifUrl":"https://ftp.goit.study/img/power-pulse/gifs/0071.gif","name":"barbell press sit-up","target":"abs","description":"This refers to your core muscles, which include the rectus abdominis, obliques, and transverse abdominis. They're essential for maintaining posture, stability, and generating force in many movements. Exercises that target the abs include crunches, leg raises, and planks.","rating":3.4,"burnedCalories":156,"time":3,"popularity":307}
+  //   ],
+  // };
+  // localStorage.setItem('favorites', JSON.stringify(sampleFavoritesData.results));
+  // localStorage.removeItem('favorites');
+
   let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-  let currentPage = 1;
 
-  function displayFavorites(page = 1) {
+  function displayFavorites() {
     cardList.innerHTML = '';
 
     if (favorites.length === 0) {
       noFavoritesMessage.style.display = 'block';
     } else {
       noFavoritesMessage.style.display = 'none';
-      const start = (page - 1) * ITEMS_PER_PAGE;
-      const end = start + ITEMS_PER_PAGE;
-      const favoritesToShow = favorites.slice(start, end);
-      favoritesToShow.forEach(exercise => createExerciseCard(exercise));
-      drawPagination(favorites.length, page);
+      cardList = renderExercises({ results: favorites }, true);
     }
   }
-
-  function createExerciseCard(exercise) {
-    const card = document.createElement('li');
-    card.className = 'exercises-cards-item';
-
-    card.innerHTML = `
-                <div class="exercises-name">
-                    <span>Workout</span>
-                    <button class="remove-btn" data-id="${exercise._id}" title="Remove from Favorites">&times;</button>
-                    <button class="exercises-name-btn" type="button" data-modal-open="">Start</button>
-                    <h3>${exercise.name}</h3>
-                    <ul>
-                        <li>Burned Calories: ${exercise.burnedCalories}</li>
-                        <li>Body part: ${exercise.bodyPart}</li>
-                        <li>Target: ${exercise.target}</li>
-                    </ul>
-                </div>
-            `;
-    const removeButton = card.querySelector('.remove-btn');
-    removeButton.addEventListener('click', () => removeExercise(exercise._id));
-    const startButton = card.querySelector('.exercises-name-btn');
-    startButton.addEventListener('click', () => openModal(exercise));
-
-    cardList.appendChild(card);
-  }
-
-  function drawPagination(totalItems, currentPage) {
-    paginationContainer.innerHTML = '';
-    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
-
-    for (let i = 1; i <= totalPages; i++) {
-      const li = document.createElement('li');
-      const button = document.createElement('filter-button');
-      button.innerHTML = i;
-      button.classList.add('filters-pagination-button');
-      if (i === currentPage) {
-        button.classList.add('filters-pagination-button-active');
-      }
-      li.appendChild(button);
-      paginationContainer.appendChild(li);
-    }
-
-    const buttons = document.querySelectorAll('.filters-pagination-button');
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        handlePaginationButtonClick(parseInt(btn.innerHTML));
-      });
-    });
-  }
-
-  function updateActivePaginationButton(currentPage) {
-    const buttons = paginationContainer.querySelectorAll(
-      '.filters-pagination-button'
-    );
-    buttons.forEach(btn => {
-      btn.classList.remove('filters-pagination-button-active');
-      if (parseInt(btn.innerHTML) === currentPage) {
-        btn.classList.add('filters-pagination-button-active');
-      }
-    });
-  }
-
-  const handlePaginationButtonClick = async page => {
-    currentPage = page;
-    updateActivePaginationButton(currentPage);
-    displayFavorites(currentPage);
-  };
 
   function openModal(exercise) {
     modalTitle.textContent = exercise.name;
@@ -102,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function removeExercise(id) {
     favorites = favorites.filter(exercise => exercise._id !== id);
     localStorage.setItem('favorites', JSON.stringify(favorites));
-    displayFavorites(currentPage);
+    displayFavorites();
   }
 
   cardList.addEventListener('click', function (event) {
@@ -122,5 +61,5 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  displayFavorites(currentPage);
+  displayFavorites();
 });
