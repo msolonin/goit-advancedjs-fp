@@ -13,7 +13,7 @@ body.modal-open {
     position: fixed;
     inset: 0;
     background-color: var(--modal-backdrop);
-    transition: var(--tran-fast);
+    transition: 2s ease-in-out;
     transition-property: visibility, opacity;
     overflow: auto;
 }
@@ -29,6 +29,8 @@ body.modal-open {
     max-width: 335px;
     min-width: 320px;
     color: var(--white-color);
+    transition: var(--tran-fast);
+    transition-property: visibility, opacity;
 }
 
 @media screen and (min-width: 768px) {
@@ -235,6 +237,7 @@ body.modal-open {
     border-radius: 30px;
     padding: 12px;
     background-color: var(--white-color);
+    border: 1px solid var(--white-color);
     color: var(--primary-color);
 }
 
