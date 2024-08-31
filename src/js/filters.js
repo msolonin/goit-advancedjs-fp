@@ -1,7 +1,11 @@
 import { request } from './services/api-service';
 import { currentResolution } from './utils/utils.js';
+import { renderExercises } from './exercises.js';
 
 const filterButtons = document.querySelectorAll('.filter-button');
+const searchForm = document.querySelector('#search-form');
+const searchInput = document.querySelector('#filter-search');
+const clearButton = document.querySelector('.button-clear');
 const filterPagination = document.querySelector('.filter-pagination');
 
 let requestBase = { path: 'filters', params: { filter: 'Muscles' } };
@@ -31,8 +35,18 @@ async function processCurrentRequest(shouldDraw = true) {
 function updateTitle() {
   const title = document.querySelector('.filter-title');
   if (requestBase.path === 'filters') {
-    title.innerHTML = 'Exercises';
+    const selectedCategory = getSelectedCategory();
+
+    title.innerHTML = `Exercises ${
+      selectedCategory ? '/ ' + `<span>${selectedCategory}</span>` : ''
+    }`;
   }
+}
+
+function getSelectedCategory() {
+  // TODO: Replace this with the actual logic to get the selected category
+  const selectedCategory = 'abs';
+  return selectedCategory;
 }
 
 function updateActivePaginationButton() {
@@ -106,7 +120,7 @@ function calculateFilterLimit() {
 const handleFilterButtonClick = async btn => {
   filterPage = 1;
   // Get filter
-  const filter = btn.innerHTML;
+  const filter = btn.innerHTML.trim();
   // Get limit
   calculateFilterLimit();
   // Remove filter-button-active for all buttons
@@ -142,4 +156,51 @@ addEventListener('resize', async () => {
   lastResolution = currentResolution;
   calculateFilterLimit();
   await drawPagination();
+});
+
+function toggleClearButton() {
+  if (searchInput.value.trim() !== '') {
+    clearButton.style.visibility = 'visible';
+  } else {
+    clearButton.style.visibility = 'hidden';
+  }
+}
+
+searchForm.addEventListener('submit', async e => {
+  e.preventDefault();
+  await handleSearch();
+});
+
+clearButton.addEventListener('click', () => {
+  searchInput.value = '';
+  toggleClearButton();
+  requestBase.params.search = '';
+  drawPagination();
+});
+
+const handleSearch = async () => {
+  const searchQuery = searchInput.value.trim();
+
+  if (searchQuery !== '') {
+    const selectedGroup = document.querySelector('.filter-button-active').value;
+    const selectedCategory = getSelectedCategory();
+
+    const searchParams = {
+      keyword: searchQuery,
+      [selectedGroup]: selectedCategory,
+    };
+
+    filterPage = 1;
+
+    const exercises = await request('exercises', searchParams);
+
+    renderExercises(exercises, false);
+
+    searchInput.value = '';
+    toggleClearButton();
+  }
+};
+
+searchInput.addEventListener('input', () => {
+  toggleClearButton();
 });

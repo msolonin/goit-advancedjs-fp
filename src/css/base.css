@@ -16,6 +16,12 @@ body {
   margin-right: auto;
 }
 
+.main {
+  display: flex;
+  flex-direction: column-reverse;
+  margin-top: 20px;
+}
+
 @media screen and (min-width: 768px) {
   .container {
     max-width: 768px;
@@ -27,5 +33,10 @@ body {
 @media screen and (min-width: 1440px) {
   .container {
     max-width: 1440px;
+  }
+
+  .main {
+    flex-direction: row;
+    gap: 32px;
   }
 }

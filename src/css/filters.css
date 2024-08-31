@@ -8,6 +8,60 @@
   font-size: 28px;
   line-height: 1.35;
   letter-spacing: -0.02em;
+
+  span {
+    font-size: 20px;
+    line-height: 20px;
+    letter-spacing: -0.4px;
+    color: var(--title-secondary-color);
+    text-transform: capitalize;
+  }
+}
+
+.filters-wrapper {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-wrapper {
+  position: relative;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.search-input {
+  padding: 12px 14px;
+  padding-right: 56px;
+  border-radius: 30px;
+  border: 1px solid #242424;
+  background: inherit;
+  font-size: 16px;
+  width: 100%;
+}
+
+.button-search, .button-clear {
+  background: inherit;
+  display: flex;
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.button-clear {
+  visibility: hidden;
+  right: 38px;
 }
 
 .filter-button-list {
@@ -84,13 +138,29 @@
     margin-top: 64px;
   }
 
-  .filter-button-list {
+  .filters-wrapper {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     margin-top: 32px;
+  }
+
+  .search-input {
+    width: 273px;
+  }
+
+  .filter-button-list {
+    margin-top: 0;
   }
 
   .filter-title {
     font-size: 44px;
     line-height: 1.09;
+
+    span {
+      font-size: 24px;
+      line-height: 32px;
+    }
   }
 
   .filter-button {
@@ -124,6 +194,21 @@
   .filter-title {
     font-size: 44px;
     line-height: 1.09;
+  }
+
+  .filters-wrapper {
+    flex-direction: row;
+    align-items: center;
+    margin-top: 0;
+    gap: 30px;
+  }
+
+  .search-input {
+    width: 273px;
+  }
+
+  .filter-button-list {
+    margin-top: 0;
   }
 
   .filter-button {
