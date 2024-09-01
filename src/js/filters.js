@@ -8,6 +8,8 @@ const searchInput = document.querySelector('#filter-search');
 const clearButton = document.querySelector('.button-clear');
 const filterPagination = document.querySelector('.filter-pagination');
 const filterTitle = document.querySelector('.filter-title');
+const filterSubTitle = document.querySelector('.filter-subtitle');
+const filterCategory = document.querySelector('.filter-title-category');
 const exercisesContainer = document.querySelector('.exercises-container');
 
 let requestBase = { path: 'filters', params: { filter: 'Muscles' } };
@@ -20,13 +22,13 @@ function drawCategories(data) {
   const categoriesContainer = document.querySelector('.category-items');
   categoriesContainer.innerHTML = '';
   categoriesContainer.style.display = 'grid';
-  searchForm.style.display = 'none';
+  searchForm.classList.remove('visible')
 
   data.results.forEach(category => {
     let li = document.createElement('li');
     let divItem = document.createElement('div');
     li.classList.add('category-item');
-    li.style.backgroundImage = `url(${category.imgURL})`;
+    li.style.backgroundImage = `linear-gradient(0deg, rgba(17, 17, 17, 0.50) 0%, rgba(17, 17, 17, 0.50) 100%), url(${category.imgURL})`;
 
     let categoryText = document.createElement('p');
     categoryText.innerHTML =
@@ -74,15 +76,12 @@ async function processCurrentRequest(shouldDraw = true) {
 }
 
 function updateTitle() {
-  const selectedCategory = getSelectedCategory();
-
-  filterTitle.innerHTML = `Exercises${
-    selectedCategory ? ' / ' + `<span>${selectedCategory}</span>` : ''
-  }`;
-}
-
-function getSelectedCategory() {
-  return filterSelectedCategory;
+  if (filterSelectedCategory) {
+    filterSubTitle.classList.add('visible')
+    filterCategory.innerHTML = filterSelectedCategory
+  } else {
+    filterSubTitle.classList.remove('visible')
+  }
 }
 
 function updateActivePaginationButton() {
@@ -234,10 +233,9 @@ const handleSearch = async () => {
   const searchQuery = searchInput.value.trim();
 
   const selectedGroup = document.querySelector('.filter-button-active').value;
-  const selectedCategory = getSelectedCategory();
 
   const searchParams = {
-    [selectedGroup]: selectedCategory,
+    [selectedGroup]: filterSelectedCategory,
   };
   if (searchQuery !== '') {
     searchParams.keyword = searchQuery;
@@ -247,7 +245,7 @@ const handleSearch = async () => {
 
   const exercises = await request('exercises', searchParams);
 
-  searchForm.style.display = 'block';
+  searchForm.classList.add("visible");
   renderExercises(exercises, false);
 
   searchInput.value = '';

@@ -9,7 +9,18 @@
   line-height: 1.35;
   letter-spacing: -0.02em;
 
-  span {
+  .filter-subtitle {
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--tran-fast);
+  }
+
+  .filter-subtitle.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .filter-title-category {
     font-size: 20px;
     line-height: 20px;
     letter-spacing: -0.4px;
@@ -25,7 +36,14 @@
 }
 
 #search-form {
-  display: none
+  transition: all var(--tran-fast);
+  opacity: 0;
+  visibility: hidden;
+}
+
+#search-form.visible {
+  opacity: 1;
+  visibility: visible;
 }
 
 .search-wrapper {
@@ -72,6 +90,7 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 20px;
+  margin-left: auto;
   gap: 20px;
 }
 
@@ -147,6 +166,7 @@
     align-items: center;
     justify-content: space-between;
     margin-top: 32px;
+    height: 44px;
   }
 
   .search-input {
@@ -161,7 +181,7 @@
     font-size: 44px;
     line-height: 1.09;
 
-    span {
+    .filter-title-category {
       font-size: 24px;
       line-height: 32px;
     }
