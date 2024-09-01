@@ -42,7 +42,6 @@
     grid-template-rows: repeat(3, 225px);
     width: auto;
     text-align: center;
-    padding: 2px;
   }
 
   .category-item {
@@ -60,7 +59,6 @@
     grid-template-rows: repeat(4, 242px);
     width: auto;
     text-align: center;
-    padding: 2px;
   }
 
 
