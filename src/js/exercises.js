@@ -1,4 +1,4 @@
-const list = document.querySelector('.exercises-list');
+const container = document.querySelector('.exercises-container');
 
 export const renderExercises = (exercises, deletable) => {
   const cardsHtml = exercises.results
@@ -48,5 +48,5 @@ export const renderExercises = (exercises, deletable) => {
     )
     .join('');
 
-  list.innerHTML = cardsHtml;
+  container.innerHTML = `<ul class="exercises-list">${cardsHtml}</ul`;
 }
