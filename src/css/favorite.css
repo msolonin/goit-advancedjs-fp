@@ -9,67 +9,95 @@
   margin-bottom: 20px;
 }
 
-.exercises-list {
-  grid-row: 1;
+.favorite-article-bar {
+  order: 1; 
 }
 
-#favorites-container {
-  max-height: 200px; 
-  overflow-y: auto; 
-  overflow-x: hidden; 
-  /* padding-right: 10px;  */
-}
-
-#favorites-container::-webkit-scrollbar {
-  width: 8px;
-}
-
-#favorites-container::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 10px;
-}
-
-
-.exercises-cards-wrapper {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-}
-
-.exercises-list {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
+.gallery {
+  display: flex;
   justify-content: center;
+  align-items: center;
+  min-height: 300px; 
+  width: 100%; 
+  box-sizing: border-box; 
+  padding-top: 40px;
 }
 
-@media only screen and (min-width: 768px) {
-  .main-title {
-    font-size: 44px;
-    line-height: 1.09;
-    letter-spacing: -0.02em;
+.no-favorites-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  max-width: 70%; 
+  margin: 0 auto;
+  padding: 40px 20px 20px 20px;
+  font-size: 16px;
+  color: rgb(36, 36, 36);
+  height: auto;
+}
+
+.exercises-container {
+  max-height: calc(3 * 150px + 45px);
+  overflow-y: auto;
+  padding-right: 16px; 
+  margin-right: -16px; 
+  box-sizing: content-box;
+}
+
+.exercises-list {
+  padding-right: 16px; 
+}
+
+.exercises-list > .exercise-card {
+  flex: 1 1 calc((100% - 40px) / 2);
+}
+
+
+.exercise-card {
+  max-width: 335px;
+  height: 141px;
+}
+
+
+/* Tablet */
+@media (min-width: 768px) {
+  .exercise-card {
+    max-width: 344px; 
+    height: 141px; 
   }
 
-  .exercises-cards-wrapper {
-    grid-template-columns: 1fr;
-  }
-
-  .exercises-list {
-    display: grid;
-    gap: 32px 15px;
-    grid-template-columns: repeat(2, 1fr);
+  .gallery {
+    padding-top: 64px;
   }
 }
 
-@media only screen and (min-width: 1440px) {
-  .exercises-cards-wrapper {
-    grid-template-columns: 444px 1fr;
-    grid-template-rows: repeat(4, 242px);
-    gap: 32px;
+/* Desktop */
+@media (min-width: 1024px) {
+  .exercise-card {
+    max-width: 405px; 
+    height: 141px; 
   }
 
-  .exercises-list {
-    grid-column: 2;
+  .gallery {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+    padding-top: 64px;
   }
 
+}
+
+@media (min-width: 1440px) {
+  .favorite-article-bar {
+    order: unset;
+  }
+
+  .gallery {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+    padding-top: 0px;
+  }
 }
