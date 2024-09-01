@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('subscriptionForm');
-  form.addEventListener('submit', validateForm);
+  if (form) {
+    form.addEventListener('submit', validateForm);
+  }
 });
 
 function validateForm(event) {
@@ -31,10 +33,11 @@ function validateForm(event) {
       } else {
         throw new Error('Unexpected error');
       }
-    })
+          })
     .then(data => {
       console.log(data);
       alert(data.message || 'Subscription successful!');
+      emailInput.value = '';
     })
     .catch(error => {
       console.error('Error:', error);
@@ -43,6 +46,6 @@ function validateForm(event) {
   } else {
     console.log('Invalid email format.');
     alert('Please enter a valid email address.');
-  }
+      }
 }
 
