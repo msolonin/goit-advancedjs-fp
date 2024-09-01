@@ -1,5 +1,10 @@
+.article-bar {
+  margin-bottom: 80px;
+}
+
 @media (min-width: 768px) {
   .article-bar {
+    margin-bottom: 100px;
     display: grid;
     column-gap: 16px;
     row-gap: 32px;

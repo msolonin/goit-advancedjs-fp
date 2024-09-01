@@ -111,6 +111,7 @@
   justify-content: center;
   margin-top: 20px;
   gap: 8px;
+  margin-bottom: 80px;
 }
 
 .filters-pagination-button {
@@ -192,6 +193,10 @@
     line-height: 1.5;
   }
 
+  .filter-pagination {
+    margin-bottom: 64px;
+  }
+
   .filters-pagination-button {
     font-size: 24px;
     line-height: 1.33;
@@ -238,6 +243,11 @@
   .filter-button {
     font-size: 16px;
     line-height: 1.5;
+  }
+
+  .filter-pagination {
+    margin-top: 32px;
+    margin-bottom: 132px;
   }
 
   .filters-pagination-button {
