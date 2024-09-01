@@ -12,6 +12,7 @@ const filterTitle = document.querySelector('.filter-title');
 const filterSubTitle = document.querySelector('.filter-subtitle');
 const filterCategory = document.querySelector('.filter-title-category');
 const exercisesContainer = document.querySelector('.exercises-container');
+const loaderDonat = document.querySelector('.js-loader');
 
 let requestBase = { path: 'filters', params: { filter: 'Muscles' } };
 let filterPage = 1;
@@ -69,10 +70,12 @@ async function processCurrentRequest(shouldDraw = true) {
     page: filterPage,
     limit: filterLimit,
   };
+  loaderDonat.classList.remove('is-hidden');
   const data = await request(requestBase.path, params);
   if (shouldDraw) {
     drawContent(data);
   }
+  loaderDonat.classList.add('is-hidden');
   return data;
 }
 
