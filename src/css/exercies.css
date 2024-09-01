@@ -39,6 +39,13 @@
 }
 .icon-delete {
     margin-left: 8px;
+    background: inherit;
+    display: flex;
+
+    svg {
+      fill: none;
+      stroke: var(--primary-color);
+    }
 }
 .button-start {
   background: white;

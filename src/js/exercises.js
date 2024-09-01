@@ -13,9 +13,11 @@ export const renderExercises = (exercises, deletable) => {
                         <use href="../img/icons.svg#icon-star-full"></use>
                     </svg>
                 </div>
-                <svg width="16" height="16" class="${deletable ? 'visible' : 'hidden'} icon-delete">
-                    <use href="../img/icons.svg#icon-trash"></use>
-                </svg>
+                <button class="${deletable ? 'visible' : 'hidden'} icon-delete" data-id="${exercise._id}" aria-label="Delete">
+                    <svg width="16" height="16">
+                        <use href="../img/icons.svg#icon-trash"></use>
+                    </svg>
+                </button>
                 <button class="button-start" data-modal-open value=${exercise._id}>
                     <p>Start</p>
                     <svg width="16" height="16">
