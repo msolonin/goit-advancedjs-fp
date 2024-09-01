@@ -53,15 +53,21 @@ function LoadElementsData(exerciseData) {
     // Full stars
     const stars = document.querySelectorAll(".icon-modal-star");
     const wholePartRating = Math.floor(exerciseData.rating);
-    for (let i = 0; i < wholePartRating; i++)
-        stars[i].classList.add("gold");
+    for (let i = 0; i < stars.length; i++) {
+        stars[i].classList.remove("gold");
+        stars[i].classList.remove("gold-half");
+        if (i < wholePartRating)
+            stars[i].classList.add("gold");
+    }
 
     // Half star
-    const fractionPartRating = Math.floor((exerciseData.rating - wholePartRating) * 100);
-    const gradientStops = document.querySelectorAll(".gradient-middle");
-    for (let i = 0; i < gradientStops.length; i++)
-        gradientStops[i].setAttribute("offset", `${fractionPartRating}%`);
-    stars[wholePartRating].classList.add("gold-half");
+    if (exerciseData.rating - Math.floor(exerciseData.rating) !== 0) {
+        const fractionPartRating = Math.floor((exerciseData.rating - wholePartRating) * 100);
+        const gradientStops = document.querySelectorAll(".gradient-middle");
+        for (let i = 0; i < gradientStops.length; i++)
+            gradientStops[i].setAttribute("offset", `${fractionPartRating}%`);
+        stars[wholePartRating].classList.add("gold-half");
+    }
 
     // Stats
     const statsList = document.querySelector(".stats-list");
