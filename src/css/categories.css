@@ -10,7 +10,7 @@
   height: 225px;
   padding: 99px 74px;
   border-radius: 12px;
-  opacity: 0px;
+  cursor: pointer;
 
   background-size: 100% 100%;
   background-position: center;
@@ -62,7 +62,7 @@
     text-align: center;
     padding: 2px;
   }
-  
+
 
   .category-item {
     width: 290px;

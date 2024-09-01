@@ -8,18 +8,19 @@ const searchInput = document.querySelector('#filter-search');
 const clearButton = document.querySelector('.button-clear');
 const filterPagination = document.querySelector('.filter-pagination');
 const filterTitle = document.querySelector('.filter-title');
+const exercisesContainer = document.querySelector('.exercises-container');
 
 let requestBase = { path: 'filters', params: { filter: 'Muscles' } };
 let filterPage = 1;
 let filterLimit = 9;
 let lastResolution = currentResolution;
-let currentExercisesName = '';
 let filterSelectedCategory = '';
 
 function drawCategories(data) {
-  console.log(data);
   const categoriesContainer = document.querySelector('.category-items');
   categoriesContainer.innerHTML = '';
+  categoriesContainer.style.display = 'grid';
+  searchForm.style.display = 'none';
 
   data.results.forEach(category => {
     let li = document.createElement('li');
@@ -43,6 +44,7 @@ function drawCategories(data) {
       categoriesContainer.innerHTML = '';
       categoriesContainer.style.display = 'none';
       filterSelectedCategory = category.name;
+      updateTitle();
       handleSearch();
     });
 
@@ -52,7 +54,7 @@ function drawCategories(data) {
 }
 
 function drawContent(data) {
-  if (filterTitle.innerHTML === 'Exercises') {
+  if (!filterSelectedCategory) {
     drawCategories(data);
   }
 }
@@ -80,7 +82,6 @@ function updateTitle() {
 }
 
 function getSelectedCategory() {
-  // TODO: Replace this with the actual logic to get the selected category
   return filterSelectedCategory;
 }
 
@@ -107,11 +108,11 @@ const handlePaginationButtonClick = async (btn, forceProcess = false) => {
   await processCurrentRequest();
 };
 
-async function drawPagination() {
+async function drawPagination(shouldDraw = false) {
   // Clear the pagination
   filterPagination.innerHTML = '';
   // Get total number of pages(filters=2,exercises=3)
-  const data = await processCurrentRequest(false);
+  const data = await processCurrentRequest(shouldDraw);
   const totalPages = data.totalPages;
   // Add <li> to the pagination for each counter while button inside
   for (let i = 1; i <= totalPages; i++) {
@@ -167,6 +168,8 @@ function calculateFilterLimit() {
 }
 
 const handleFilterButtonClick = async btn => {
+  exercisesContainer.innerHTML = '';
+  filterSelectedCategory = '';
   filterPage = 1;
   // Get filter
   const filter = btn.innerHTML.trim();
@@ -181,7 +184,7 @@ const handleFilterButtonClick = async btn => {
 
   requestBase = { path: 'filters', params: { filter } };
   updateTitle();
-  await drawPagination();
+  await drawPagination(true);
 };
 
 // Register all the filter-button clicks to the handleFilterButtonClick function
@@ -244,6 +247,7 @@ const handleSearch = async () => {
 
   const exercises = await request('exercises', searchParams);
 
+  searchForm.style.display = 'block';
   renderExercises(exercises, false);
 
   searchInput.value = '';

@@ -24,6 +24,10 @@
   flex-direction: column;
 }
 
+#search-form {
+  display: none
+}
+
 .search-wrapper {
   position: relative;
 }
