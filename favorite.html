@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>YourEnergy - Favorites</title>
-    <script type="module" crossorigin src="/goit-advancedjs-fp/favorite.js"></script>
-    <link rel="modulepreload" crossorigin href="/goit-advancedjs-fp/assets/vendor-Cn2Vr82J.js">
-    <link rel="modulepreload" crossorigin href="/goit-advancedjs-fp/assets/main-BQFbHuaZ.js">
-    <link rel="stylesheet" crossorigin href="/goit-advancedjs-fp/assets/main-C8DZJ_Qu.css">
-    <link rel="stylesheet" crossorigin href="/goit-advancedjs-fp/assets/favorite-IfoCEJhP.css">
-  </head>
 
-  <body>
-    <header class="header">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/goit-advancedjs-fp/favicon.svg" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css"
+    integrity="sha512-4xo8blKMVCiXpTaLzQSLSw3KFOVPWhm/TRtuPVc4WG6kUgjH6J03IBuG7JZPkcWMxJ5huwaBpOpnwYElP/m6wg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>YourEnergy - Favorites</title>
+  <script type="module" crossorigin src="/goit-advancedjs-fp/favorite.js"></script>
+  <link rel="modulepreload" crossorigin href="/goit-advancedjs-fp/assets/vendor-Cn2Vr82J.js">
+  <link rel="modulepreload" crossorigin href="/goit-advancedjs-fp/assets/main-CEuePCfv.js">
+  <link rel="stylesheet" crossorigin href="/goit-advancedjs-fp/assets/main-C8DZJ_Qu.css">
+  <link rel="stylesheet" crossorigin href="/goit-advancedjs-fp/assets/favorite-CyGQAFLd.css">
+</head>
+
+<body>
+  <header class="header">
   <div class="container header-wrapper">
     <a
       class="logo mobile-logo"
@@ -111,15 +118,15 @@
   </div>
 </header>
 
-    <main>
-      <div class="container">
-        <h1 class="main-title">
-          <span class="main-title-gradient">Favorites</span>
-        </h1>
-
-        <div class="exercises-cards-wrapper">
-          <div class="favorite-article-bar">
-            <!-- QUOTE START -->
+  <main>
+    <div class="container">
+      <h1 class="main-title">
+        <span class="main-title-gradient">Favorites</span>
+      </h1>
+    </div>
+    <div class="container main">
+      <div class="favorite-article-bar">
+        <!-- QUOTE START -->
 <blockquote class="quote">
   <div class="quote-icon">
     <svg width="18" height="20">
@@ -139,8 +146,8 @@
 </blockquote>
 <!-- QUOTE END -->
 
-            <div class="favorite-article-bar-inner">
-              <!-- INFO START -->
+        <div class="favorite-article-bar-inner">
+          <!-- INFO START -->
 <article class="info info-small">
   <div class="info-icon">
     <svg width="20" height="20">
@@ -163,7 +170,7 @@
 </article>
 <!-- INFO END -->
 
-              <!-- FAVORITE ARTICAL BAR START -->
+          <!-- FAVORITE ARTICAL BAR START -->
 <picture class="article-bar-img">
   <source
     srcset="/goit-advancedjs-fp/assets/favorite-article-bar-desktop@1x-CWOTGlPC.jpg 1x, /goit-advancedjs-fp/assets/favorite-article-bar-desktop@2x-BUFX7abZ.jpg 2x"
@@ -195,145 +202,28 @@
 </picture>
 <!-- FAVORITE ARTICAL BAR END -->
 
-            </div>
-          </div>
-
-          <div id="favorites-container" class="exercises-list favorites-grid">
-            <!-- Exercise cards will be here -->
-          </div>
-
-          <div id="no-favorites" class="no-favorites-message">
-            <p>
-              It appears that you haven't added any exercises to your favorites
-              yet. To get started, you can add exercises that you like to your
-              favorites for easier access in the future.
-            </p>
-          </div>
-
-          <!-- todo: export correct modal -->
-          <!-- <div id="exercise-modal" class="modal">
-          <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h2 id="modal-title">title</h2>
-            <p id="modal-details">info exercise.</p>
-          </div>
-        </div> -->
         </div>
       </div>
-      <div class="scroll-up-container">
+
+      <div class="gallery">
+        <div class="exercises-container">
+</div>
+        <div id="no-favorites" class="no-favorites-message">
+          <p>
+            It appears that you haven't added any exercises to your favorites
+            yet. To get started, you can add exercises that you like to your
+            favorites for easier access in the future.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-up-container">
   <div class="scroll-up-button">
   </div>
 </div>
 
-    </main>
-    <footer class="footer">
-  <div class="container" id="footer">
-    <div class="footer-blocks">
-      <div class="footer-logo-soial">
-        <div class="footer-logo">
-          <a class="footer-logo-link" href="index.html">
-            <svg class="logo-icon-footer">
-              <use href="/goit-advancedjs-fp/assets/main-logo-1t1ruA9Q.svg#main-logo"></use>
-            </svg>
-          </a>
-        </div>
-        <div class="footer-social-menu">
-          <ul class="social-menu-ul">
-            <li class="social-item">
-              <a
-                class="social-link-li"
-                href="https://www.facebook.com/goITclub/"
-                aria-label="Go to our Facebook page"
-                target="_blank"
-              >
-                <svg class="social-icon-li" width="28" height="28">
-                  <use href="/goit-advancedjs-fp/assets/icons-DRImzY5-.svg#icon-facebook"></use>
-                </svg>
-              </a>
-            </li>
-            <li class="social-item">
-              <a
-                class="social-link-li"
-                href="https://www.instagram.com/goitclub/"
-                aria-label="Go to our Instagram page"
-                target="_blank"
-              >
-                <svg class="social-icon-li" width="28" height="28">
-                  <use href="/goit-advancedjs-fp/assets/icons-DRImzY5-.svg#icon-instagram"></use>
-                </svg>
-              </a>
-            </li>
-            <li class="social-item">
-              <a
-                class="social-link-li"
-                href="https://www.youtube.com/c/GoIT"
-                aria-label="Go to our Youtube page"
-                target="_blank"
-              >
-                <svg class="social-icon-li" width="28" height="28">
-                  <use href="/goit-advancedjs-fp/assets/icons-DRImzY5-.svg#icon-youtube"></use>
-                </svg>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-text-subs">
-        <div class="footer-text">
-          <p class="text-footer">
-            Transforming your <span class="text-footer-word">body</span> shape
-            with us
-          </p>
-        </div>
-        <div class="footer-subscribe-form">
-          <form
-            class="subscribe-form"
-            name="subscription"
-            onsubmit="return validateForm(event)"
-          >
-            <label class="subscribe-label" for="E-mail">
-              Subscribe and learn about new exercises!
-              <input
-                class="e-mail-input"
-                type="email"
-                id="E-mail"
-                name="E-mail"
-                placeholder="E-mail"
-                pattern="^\w+(\.\w+)?@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"
-                required
-              />
-            </label>
-            <div class="footer-subscribe-button">
-              <button class="subscribe-button" type="submit">
-                <span class="subscribe-button-text">Send</span>
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <div class="footer-agreements">
-      <div class="footer-copy-policy">
-        <p class="footer-copy-paragraphs-rights">
-          Your Energy. All rights reserved.
-        </p>
-        <ul class="footer-policy-list">
-          <li class="footer-policy-item">
-            <a class="footer-policy-link" href="#">Privacy Policy</a>
-          </li>
-          <li class="footer-policy-item">
-            <a class="footer-policy-link" href="#"
-              ><span class="footer-policy-separator">/</span>Terms of Service</a
-            >
-          </li>
-        </ul>
-      </div>
-      <p class="footer-copy-paragraphs-year">©2023</p>
-    </div>
-  </div>
-</footer>
-
-    <!-- <button data-modal-open value="64f389465ae26083f39b18d7">modal</button>
+  </main>
+  <!-- <button data-modal-open value="64f389465ae26083f39b18d7">modal</button>
 <button data-modal-open value="64f389465ae26083f39b17b7">modal</button> -->
 
 <div class="backdrop hidden" data-modal>
@@ -382,5 +272,6 @@
 
 
 
-  </body>
+</body>
+
 </html>
