@@ -1,6 +1,6 @@
 import { renderExercises } from './exercises.js';
 import { LoadListenersForOpenModal } from './modal.js';
-import { GetFavorites } from './utils/local-storage.js';
+import { GetFavorites, RemoveFromFavorites } from './utils/local-storage.js';
 import { request } from './services/api-service.js';
 
 const modal = document.querySelector('[data-modal]');
@@ -40,12 +40,27 @@ document.addEventListener('DOMContentLoaded', async function () {
       const favoritesData = await fetchFavoriteData(favoritesIDs);
       renderExercises({ results: favoritesData }, true);
       LoadListenersForOpenModal();
+      attachDeleteListeners();
     }
   }
 
+  function attachDeleteListeners() {
+    const deleteButtons = document.querySelectorAll('.icon-delete');
+    deleteButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const exerciseID = button.getAttribute('data-id');
+        RemoveFromFavorites(exerciseID);
+        favoritesIDs = GetFavorites();
+        displayFavorites();
+      });
+    });
+  }
+
   window.addEventListener('click', function (event) {
-    if (event.target === modal) {
+    if (event.target === modal || event.target.closest('[data-modal-close]')) {
       modal.classList.add('hidden');
+      favoritesIDs = GetFavorites();
+      displayFavorites();
     }
   });
 
