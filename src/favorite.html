@@ -1,58 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YourEnergy - Favorites</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/favorite.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>YourEnergy - Favorites</title>
-  <link rel="stylesheet" href="./css/styles.css" />
-  <link rel="stylesheet" href="./css/favorite.css" />
-</head>
+  <body>
+    <load
+      src="./partials/header.html"
+      icon-path="./img/sprite.svg#logo"
+      highlight-act="active"
+    />
+    <main>
+      <div class="container">
+        <h1 class="main-title">
+          <span class="main-title-gradient">Favorites</span>
+        </h1>
 
-<body>
-  <load src="./partials/header.html" icon-path="./img/sprite.svg#logo" highlight-act="active" />
-  <main>
-    <div class="container">
-      <h1 class="main-title">
-        <span class="main-title-gradient">Favorites</span>
-      </h1>
-
-      <div class="exercises-cards-wrapper">
-        <div class="favorite-article-bar">
-          <load src="./partials/quote.html" />
-          <div class="favorite-article-bar-inner">
-            <load src="./partials/info.html" variant="info-small" />
-            <load src="./partials/favorite-article-bar-img.html" />
+        <div class="exercises-cards-wrapper">
+          <div class="favorite-article-bar">
+            <load src="./partials/quote.html" />
+            <div class="favorite-article-bar-inner">
+              <load src="./partials/info.html" variant="info-small" />
+              <load src="./partials/favorite-article-bar-img.html" />
+            </div>
           </div>
-        </div>
 
-        <div id="favorites-container" class="exercises-list favorites-grid">
-          <!-- Exercise cards will be here -->
-        </div>
+          <div id="favorites-container" class="exercises-list favorites-grid">
+            <!-- Exercise cards will be here -->
+          </div>
 
-        <div id="no-favorites" class="no-favorites-message">
-          <p>It appears that you haven't added any exercises to your favorites yet. To get started, you can add
-            exercises
-            that you like to your favorites for easier access in the future.</p>
-        </div>
+          <div id="no-favorites" class="no-favorites-message">
+            <p>
+              It appears that you haven't added any exercises to your favorites
+              yet. To get started, you can add exercises that you like to your
+              favorites for easier access in the future.
+            </p>
+          </div>
 
-        <!-- todo: export correct modal -->
-        <div id="exercise-modal" class="modal">
+          <!-- todo: export correct modal -->
+          <!-- <div id="exercise-modal" class="modal">
           <div class="modal-content">
             <span class="close-btn">&times;</span>
             <h2 id="modal-title">title</h2>
             <p id="modal-details">info exercise.</p>
           </div>
+        </div> -->
         </div>
       </div>
-    </div>
-  </main>
-  <load src="./partials/scroll-up.html" />
-  <load src="./partials/footer.html" />
+      <load src="./partials/scroll-up.html" />
+    </main>
+    <load src="./partials/footer.html" />
+    <load src="./partials/modal.html" />
 
-  <script type="module" src="./js/main.js"></script>
-  <script type="module" src="./js/favorite.js"></script>
-</body>
-
+    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/favorite.js"></script>
+  </body>
 </html>

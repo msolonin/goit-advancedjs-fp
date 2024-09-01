@@ -1,6 +1,7 @@
 import { request } from './services/api-service';
 import { currentResolution } from './utils/utils.js';
 import { renderExercises } from './exercises.js';
+import { LoadListenersForOpenModal } from './modal.js';
 
 const filterButtons = document.querySelectorAll('.filter-button');
 const searchForm = document.querySelector('#search-form');
@@ -247,6 +248,7 @@ const handleSearch = async () => {
 
   searchForm.classList.add("visible");
   renderExercises(exercises, false);
+  LoadListenersForOpenModal();
 
   searchInput.value = '';
   toggleClearButton();
