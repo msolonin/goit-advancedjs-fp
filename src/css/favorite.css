@@ -1,26 +1,26 @@
 .main-title {
   color: rgb(36, 36, 36);
-  font-family: DM Sans;
+  font-family: 'DM Sans', sans-serif;
   font-size: 28px;
   font-weight: 400;
   line-height: 38px;
-  letter-spacing: -2%;
   text-align: left;
-  margin-bottom: 20px;
+  margin: 80px 0 20px 0;
 }
 
 .favorite-article-bar {
-  order: 1; 
+  order: 1;
 }
 
 .gallery {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 300px; 
-  width: 100%; 
-  box-sizing: border-box; 
+  min-height: 300px;
+  width: 100%;
+  box-sizing: border-box;
   padding-top: 40px;
+  margin-bottom: 20px;
 }
 
 .no-favorites-message {
@@ -28,7 +28,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  max-width: 70%; 
+  max-width: 70%;
   margin: 0 auto;
   padding: 40px 20px 20px 20px;
   font-size: 16px;
@@ -39,31 +39,29 @@
 .exercises-container {
   max-height: calc(3 * 150px + 45px);
   overflow-y: auto;
-  padding-right: 16px; 
-  margin-right: -16px; 
+  padding-right: 16px;
+  margin-right: -16px;
   box-sizing: content-box;
-}
-
-.exercises-list {
-  padding-right: 16px; 
 }
 
 .exercises-list > .exercise-card {
   flex: 1 1 calc((100% - 40px) / 2);
 }
 
-
 .exercise-card {
   max-width: 335px;
   height: 141px;
 }
 
-
 /* Tablet */
 @media (min-width: 768px) {
+  .main-title {
+    margin: 100px 0 32px;
+  }
+
   .exercise-card {
-    max-width: 344px; 
-    height: 141px; 
+    max-width: 344px;
+    height: 141px;
   }
 
   .gallery {
@@ -73,24 +71,26 @@
 
 /* Desktop */
 @media (min-width: 1024px) {
-  .exercise-card {
-    max-width: 405px; 
-    height: 141px; 
-  }
-
   .gallery {
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-start;
     gap: 20px;
-    padding-top: 64px;
   }
-
 }
 
 @media (min-width: 1440px) {
+  .main-title {
+    margin-top: 90px;
+  }
+
   .favorite-article-bar {
     order: unset;
+  }
+
+  .exercise-card {
+    max-width: 405px;
+    height: 141px;
   }
 
   .gallery {
