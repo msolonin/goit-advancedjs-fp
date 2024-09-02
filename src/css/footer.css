@@ -101,7 +101,7 @@
   border-radius: 30px;
   border: 1px solid var(--white-color);
   background-color: var(--primary-color);
-  color: var(--color-white-background);
+  color: var(--white-bg-color);
   font-family: inherit;
   font-size: 14px;
   line-height: 1.28571;
