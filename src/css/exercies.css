@@ -13,6 +13,10 @@
   background: white;
   padding: 16px;
   cursor: pointer;
+  transition: transform 250ms linear;
+}
+.exercise-card:hover {
+  transform: scale(1.05);
 }
 .exercise-header {
   display: flex;
