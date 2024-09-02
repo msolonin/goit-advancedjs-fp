@@ -8,15 +8,7 @@ const modal = document.querySelector("[data-modal]"); // Modal with backdrop
 const btnAddFavorites = document.querySelector(".btn-modal-add-fav");
 
 let exerciseID = ''; // ID of the exercise
-    // const btnOpenModal = document.querySelectorAll("[data-modal-open]");
-    // for (let i = 0; i < btnOpenModal.length; i++) {
-    //     btnOpenModal[i].addEventListener("click", (event) => {
-    //         const btn = event.target;
-    //         exerciseID = btn.value;
-    //         LoadModalData(exerciseID);
-    //     });  
-    // }
-    
+
 async function LoadModalData(_id) {
     exerciseID = _id;
     const exerciseData = await request(`exercises/${exerciseID}`);
@@ -25,7 +17,6 @@ async function LoadModalData(_id) {
     // Add to favorites btn functions
     
     // Check local storage if it contains exercise
-    // localStorage.setItem("favorites", JSON.stringify([1])); // For test
     if (GetFavorites().indexOf(exerciseID) >= 0) {
         btnAddFavorites.classList.add("fav-added");
         document.querySelector(".btn-fav-text").textContent = "Remove from favorites";
@@ -43,8 +34,16 @@ async function LoadModalData(_id) {
     OnOpen();
 };
 
+function ClearModalData() {
+    document.querySelector(".img-modal-exercise").src = '';
+    document.querySelector(".title-modal").textContent = '';
+    document.querySelector(".rating-value").textContent = '0';
+    document.querySelector(".stats-list").innerHTML = '';
+    document.querySelector(".desc-text").textContent = '';
+}
 
 function LoadElementsData(exerciseData) {
+    ClearModalData();
     document.querySelector(".img-modal-exercise").src = exerciseData.gifUrl;
     document.querySelector(".title-modal").textContent = exerciseData.name.trim();
     document.querySelector(".desc-text").textContent = exerciseData.description.trim();
@@ -152,12 +151,11 @@ modal.addEventListener("click", (event) => {
                 OnClose();
             }
             // If Give a rating modal opened
-            else if (!modalAddRatingWindow.classList.contains("visually-hidden") && !giveRatingIsPressed) {
+            else if (!modalAddRatingWindow.classList.contains("visually-hidden")) {
                 modalAddRatingWindow.classList.add("visually-hidden");
                 modalWindow.classList.remove("visually-hidden");
                 ClearRatingForm(modalAddRatingWindow.querySelector("form"));
             }
-            giveRatingIsPressed = false;
         }
     }
     event.stopImmediatePropagation();
@@ -194,10 +192,8 @@ function OnClose() {
 // Give a rating button
 const modalAddRatingWindow = document.querySelector(".add-rating-modal"); // Modal Give a rating
 const btnOpenRatingModal = document.querySelector("[data-add-rating-open]");
-let giveRatingIsPressed = false;
 
 btnOpenRatingModal.addEventListener("click", (event) => {
-    giveRatingIsPressed = true;
     modalAddRatingWindow.classList.remove("visually-hidden");
     modalWindow.classList.add("visually-hidden");
     OnOpen();
@@ -271,9 +267,18 @@ formAddRating.addEventListener("submit", (event) => {
             ClearRatingForm(form);
             modalWindow.classList.remove("visually-hidden");
             event.stopImmediatePropagation();
-            form.submit();
+            return true;
         }).catch(response => { 
-            alert(`While sending your rating something happend (${response.status}: ${response.response.statusText})`);
+            if (response.status == 400)
+                alert("Error 400: Bad request");
+            else if (response.status == 404)
+                alert("Error 404: Such exercise not found");
+            else if (response.status == 409)
+                alert("Error 409: Such email already exists");
+            else if (response.status == 500)
+                alert("Error 500: Server error");
+            else
+                alert("Error: While sending your review something happend :(");
         });
     }
     event.stopImmediatePropagation();

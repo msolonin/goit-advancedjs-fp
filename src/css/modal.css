@@ -29,7 +29,7 @@ body.modal-open {
     max-width: 335px;
     min-width: 320px;
     color: var(--white-color);
-    transition-property: opacity;
+    transition-property: all;
     transition: var(--tran-fast);
 }
 
