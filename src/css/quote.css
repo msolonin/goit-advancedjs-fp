@@ -93,7 +93,8 @@
   display: inline-block;
   margin-top: 16px;
   font-size: 14px;
-  line-height: 18px;
+  font-weight: 400;
+  line-height: 1.28571;
 }
 
 .quote-author.skeleton {
@@ -104,7 +105,7 @@
 @media screen and (min-width: 768px) {
   .quote-author {
     font-size: 16px;
-    line-height: 24px;
+    line-height: 1.5;
   }
 }
 
