@@ -6,7 +6,7 @@
   margin-top: 20px;
   display: block;
   overflow: hidden;
-  width: 335px;
+  max-width: 335px;
   height: 225px;
   padding: 99px 74px;
   border-radius: 12px;
