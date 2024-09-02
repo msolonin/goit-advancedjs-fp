@@ -11,3 +11,13 @@ export const request = async (path, params) => {
     throw error;
   }
 };
+
+export const patch = async (path, params) => {
+  try {
+    const endpoint = `${BASE_URL}${path}`;
+    const response = await axios.patch(endpoint, params);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
