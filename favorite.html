@@ -14,8 +14,8 @@
   <title>YourEnergy - Favorites</title>
   <script type="module" crossorigin src="/goit-advancedjs-fp/favorite.js"></script>
   <link rel="modulepreload" crossorigin href="/goit-advancedjs-fp/assets/vendor-Cn2Vr82J.js">
-  <link rel="modulepreload" crossorigin href="/goit-advancedjs-fp/assets/main-DPw95JgF.js">
-  <link rel="stylesheet" crossorigin href="/goit-advancedjs-fp/assets/main-Lf8zelmk.css">
+  <link rel="modulepreload" crossorigin href="/goit-advancedjs-fp/assets/main-Bu5KCaTX.js">
+  <link rel="stylesheet" crossorigin href="/goit-advancedjs-fp/assets/main-DkXyYAie.css">
   <link rel="stylesheet" crossorigin href="/goit-advancedjs-fp/assets/favorite-DjeR__xb.css">
 </head>
 
@@ -141,7 +141,7 @@
       </svg>
     </div>
     <p class="quote-desc skeleton"></p>
-    <strong class="quote-author skeleton"></strong>
+    <span class="quote-author skeleton"></span>
   </div>
 </blockquote>
 <!-- QUOTE END -->
@@ -226,7 +226,7 @@
   <!-- <button data-modal-open value="64f389465ae26083f39b18d7">modal</button>
 <button data-modal-open value="64f389465ae26083f39b17b7">modal</button> -->
 
-<div class="backdrop hidden" data-modal>
+<div class="backdrop visually-hidden" data-modal>
   <div class="modal">
     <button class="btn-modal-close" data-modal-close>
       <svg class="icon icon-modal-close">
@@ -260,13 +260,112 @@
         <ul class="stats-list"></ul>
       </div>
       <div class="description"><p class="desc-text"></p></div>
-      <button class="btn-modal-add-fav">
-        <span class="btn-fav-text">Add to favorites</span>
-        <svg class="icon icon-fav-btn" width="18" height="18">
-          <use class="icon-fav-btn-use" href="/goit-advancedjs-fp/assets/icons-DRImzY5-.svg#icon-heart"></use>
-        </svg>
-      </button>
+      <div class="modal-buttons">
+        <button class="btn-modal-filled btn-modal-add-fav">
+          <span class="btn-fav-text">Add to favorites</span>
+          <svg class="icon icon-fav-btn" width="18" height="18">
+            <use
+              class="icon-fav-btn-use"
+              href="/goit-advancedjs-fp/assets/icons-DRImzY5-.svg#icon-heart"
+            ></use>
+          </svg>
+        </button>
+        <button class="btn-modal-give-rating" data-add-rating-open>
+          Give a rating
+        </button>
+      </div>
     </div>
+  </div>
+
+  <!-- Add rating modal -->
+  <div class="add-rating-modal visually-hidden">
+    <button class="btn-modal-close" data-add-rating-close>
+      <svg class="icon icon-modal-close">
+        <use href="/goit-advancedjs-fp/assets/icons-DRImzY5-.svg#icon-close"></use>
+      </svg>
+    </button>
+    <form class="add-rating-form" method="post">
+      <p class="add-rating-title">Rating</p>
+
+      <div class="add-rating-stars">
+        <span class="add-rating-value">0</span>
+        <label class="star-radio-btn">
+          <input
+            type="radio"
+            name="radio"
+            class="add-rating-radio-btn visually-hidden"
+            value="1"
+          />
+          <svg class="icon icon-modal-rating-star" width="24" height="24">
+            <use href="/goit-advancedjs-fp/assets/icons-DRImzY5-.svg#icon-star"></use>
+          </svg>
+        </label>
+        <label class="star-radio-btn">
+          <input
+            type="radio"
+            name="radio"
+            class="add-rating-radio-btn visually-hidden"
+            value="2"
+          />
+          <svg class="icon icon-modal-rating-star" width="24" height="24">
+            <use href="/goit-advancedjs-fp/assets/icons-DRImzY5-.svg#icon-star"></use>
+          </svg>
+        </label>
+        <label class="star-radio-btn">
+          <input
+            type="radio"
+            name="radio"
+            class="add-rating-radio-btn visually-hidden"
+            value="3"
+          />
+          <svg class="icon icon-modal-rating-star" width="24" height="24">
+            <use href="/goit-advancedjs-fp/assets/icons-DRImzY5-.svg#icon-star"></use>
+          </svg>
+        </label>
+        <label class="star-radio-btn">
+          <input
+            type="radio"
+            name="radio"
+            class="add-rating-radio-btn visually-hidden"
+            value="4"
+          />
+          <svg class="icon icon-modal-rating-star" width="24" height="24">
+            <use href="/goit-advancedjs-fp/assets/icons-DRImzY5-.svg#icon-star"></use>
+          </svg>
+        </label>
+        <label class="star-radio-btn">
+          <input
+            type="radio"
+            name="radio"
+            class="add-rating-radio-btn visually-hidden"
+            value="5"
+          />
+          <svg class="icon icon-modal-rating-star" width="24" height="24">
+            <use href="/goit-advancedjs-fp/assets/icons-DRImzY5-.svg#icon-star"></use>
+          </svg>
+        </label>
+      </div>
+
+      <input
+        type="email"
+        class="input-modal add-rating-email"
+        name="email"
+        id="email"
+        pattern="^\w+(\.\w+)?@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"
+        placeholder="Email"
+        required
+      />
+      <textarea
+        name="comment"
+        id="comment"
+        class="input-modal add-rating-comment"
+        placeholder="Your comment"
+        required
+      ></textarea>
+      <button type="submit" class="btn-modal-filled btn-add-rating-submit">
+        Send
+      </button>
+    </form>
   </div>
 </div>
 
