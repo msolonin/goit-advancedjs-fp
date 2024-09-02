@@ -74,24 +74,22 @@
 
 /* Desktop */
 @media (min-width: 1024px) {
-  .exercise-card {
-    max-width: 405px;
-    height: 141px;
-  }
-
   .gallery {
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-start;
     gap: 20px;
-    padding-top: 64px;
   }
-
 }
 
 @media (min-width: 1440px) {
   .favorite-article-bar {
     order: unset;
+  }
+
+  .exercise-card {
+    max-width: 405px;
+    height: 141px;
   }
 
   .gallery {
