@@ -2,6 +2,7 @@ const container = document.querySelector('.exercises-container');
 import iconPath from '../img/icons.svg';
 
 export const renderExercises = (exercises, deletable) => {
+  if (exercises.results.length > 0) {
   const cardsHtml = exercises.results
     .map(
       exercise => `
@@ -50,6 +51,10 @@ export const renderExercises = (exercises, deletable) => {
     `
     )
     .join('');
-
-  container.innerHTML = `<ul class="exercises-list">${cardsHtml}</ul`;
+      container.innerHTML = `<ul class="exercises-list">${cardsHtml}</ul`;
+  } else {
+      container.innerHTML = `<div class="nothing-found">
+        <p class="hero-desc"> Nothing found</p>
+      </div`;
+  }
 }

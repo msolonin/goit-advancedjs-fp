@@ -248,6 +248,9 @@ const handleSearch = async () => {
   filterPage = 1;
 
   const exercises = await request('exercises', searchParams);
+  if (exercises.totalPages === null) {
+    filterPagination.innerHTML = '';
+  }
 
   searchForm.classList.add("visible");
   renderExercises(exercises, false);
