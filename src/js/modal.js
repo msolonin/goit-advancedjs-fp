@@ -1,5 +1,5 @@
 import { GetFavorites, AddToFavorites, RemoveFromFavorites } from "./utils/local-storage.js";
-import { request } from "./services/api-service.js";
+import { request, patch } from "./services/api-service.js";
 import iconsPath from "../img/icons.svg";
 
 const btnCloseModal = document.querySelector("[data-modal-close]");
@@ -155,10 +155,12 @@ modal.addEventListener("click", (event) => {
             else if (!modalAddRatingWindow.classList.contains("visually-hidden") && !giveRatingIsPressed) {
                 modalAddRatingWindow.classList.add("visually-hidden");
                 modalWindow.classList.remove("visually-hidden");
+                ClearRatingForm(modalAddRatingWindow.querySelector("form"));
             }
             giveRatingIsPressed = false;
         }
     }
+    event.stopImmediatePropagation();
 });
 
 function escapeKeyDown(event) {
@@ -172,7 +174,7 @@ function escapeKeyDown(event) {
         else if (!modalAddRatingWindow.classList.contains("visually-hidden")) {
             modalAddRatingWindow.classList.add("visually-hidden");
             modalWindow.classList.remove("visually-hidden");
-            // OnClose();
+            ClearRatingForm(modalAddRatingWindow.querySelector("form"));
         }
     }
 }
@@ -210,18 +212,29 @@ const btnCloseRatingModal = document.querySelector("[data-add-rating-close]");
 btnCloseRatingModal.addEventListener("click", (event) => {
     modalAddRatingWindow.classList.add("visually-hidden");
     modalWindow.classList.remove("visually-hidden");
-    // OnClose();
+    ClearRatingForm(modalAddRatingWindow.querySelector("form"));
     event.stopImmediatePropagation();
 });
 
-let checkedRating = false;
+function ClearRatingForm(form) {
+    form.elements.email.value = '';
+    form.elements.comment.value = '';
+    for (let radio of form.elements.radio)
+        radio.checked = false;
+    checkedRating = 0;
+    document.querySelector(".add-rating-value").textContent = '0';
+    for (let star of document.querySelectorAll(".icon-modal-rating-star"))
+        star.classList.remove("gold");
+}
+
+let checkedRating = 0;
 function LoadRatingModal() {
-    checkedRating = false;
+    checkedRating = 0;
     const radioBtns = document.querySelectorAll(".add-rating-radio-btn");
     for(let radio of radioBtns) {
         radio.addEventListener("click", (event) => {
-            checkedRating = true;
             const rating = event.currentTarget.value;
+            checkedRating = Number(rating);
             document.querySelector(".add-rating-value").textContent = rating;
             const stars = document.querySelectorAll(".icon-modal-rating-star");
             for (let i = 0; i < stars.length; i++) {
@@ -240,18 +253,29 @@ const formAddRating = document.querySelector(".add-rating-form");
 formAddRating.addEventListener("submit", (event) => {
     event.preventDefault();
     const form = event.target;
-    if (!checkedRating)
-        alert("Choose rating");
-    else if (!form.elements.email.value)
+    const email = form.elements.email.value;
+    const comment = form.elements.comment.value;
+    if (!checkedRating) 
+        alert("Choose your rate");
+    else if (!email)
         alert("Enter your email");
-    else if (!form.elements.comment.value)
+    else if (!comment)
         alert("Leave a comment");
     else {
-        try {
-            ;
-        } catch (error) {
-            alert(`While sending your rating something happend (${error.message})`);
-        }
+        patch(`exercises/${exerciseID}/rating`, {
+            rate: checkedRating,
+            email,
+            review: comment
+        }).then(response => {
+            modalAddRatingWindow.classList.add("visually-hidden");
+            ClearRatingForm(form);
+            modalWindow.classList.remove("visually-hidden");
+            event.stopImmediatePropagation();
+            form.submit();
+        }).catch(response => { 
+            alert(`While sending your rating something happend (${response.status}: ${response.response.statusText})`);
+        });
     }
     event.stopImmediatePropagation();
+    return false;
 });

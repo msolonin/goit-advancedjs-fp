@@ -12,6 +12,12 @@ export const request = async (path, params) => {
   }
 };
 
-export const post = async (path, params) => {
-  ;
+export const patch = async (path, params) => {
+  try {
+    const endpoint = `${BASE_URL}${path}`;
+    const response = await axios.patch(endpoint, params);
+    return response;
+  } catch (error) {
+    throw error;
+  }
 };
