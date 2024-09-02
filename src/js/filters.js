@@ -19,6 +19,7 @@ let filterPage = 1;
 let filterLimit = 9;
 let lastResolution = currentResolution;
 let filterSelectedCategory = '';
+let filterPaginationEnabled = true;
 
 function drawCategories(data) {
   const categoriesContainer = document.querySelector('.category-items');
@@ -60,6 +61,7 @@ function drawCategories(data) {
 function drawContent(data) {
   if (!filterSelectedCategory) {
     drawCategories(data);
+    filterPaginationEnabled = true;
   }
 }
 
@@ -114,6 +116,9 @@ const handlePaginationButtonClick = async (btn, forceProcess = false) => {
 async function drawPagination(shouldDraw = false) {
   // Clear the pagination
   filterPagination.innerHTML = '';
+  if (!filterPaginationEnabled) {
+    return;
+  }
   // Get total number of pages(filters=2,exercises=3)
   const data = await processCurrentRequest(shouldDraw);
   const totalPages = data.totalPages;
@@ -187,6 +192,7 @@ const handleFilterButtonClick = async btn => {
 
   requestBase = { path: 'filters', params: { filter } };
   updateTitle();
+  filterPaginationEnabled = true;
   await drawPagination(true);
 };
 
@@ -253,6 +259,8 @@ const handleSearch = async () => {
   }
 
   searchForm.classList.add("visible");
+  filterPaginationEnabled = false;
+  drawPagination();
   renderExercises(exercises, false);
   LoadListenersForOpenModal();
 
