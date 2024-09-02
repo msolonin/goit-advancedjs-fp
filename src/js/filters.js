@@ -248,7 +248,6 @@ const handleSearch = async () => {
   filterPage = 1;
 
   const exercises = await request('exercises', searchParams);
-  console.log(exercises);
   if (exercises.totalPages === null) {
     filterPagination.innerHTML = '';
   }
