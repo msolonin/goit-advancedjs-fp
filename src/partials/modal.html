@@ -1,7 +1,7 @@
 <!-- <button data-modal-open value="64f389465ae26083f39b18d7">modal</button>
 <button data-modal-open value="64f389465ae26083f39b17b7">modal</button> -->
 
-<div class="backdrop hidden" data-modal>
+<div class="backdrop visually-hidden" data-modal>
   <div class="modal">
     <button class="btn-modal-close" data-modal-close>
       <svg class="icon icon-modal-close">
@@ -53,7 +53,7 @@
   </div>
 
   <!-- Add rating modal -->
-  <div class="add-rating-modal hidden">
+  <div class="add-rating-modal visually-hidden">
     <button class="btn-modal-close" data-add-rating-close>
       <svg class="icon icon-modal-close">
         <use href="./img/icons.svg#icon-close"></use>
@@ -63,29 +63,76 @@
       <p class="add-rating-title">Rating</p>
 
       <div class="add-rating-stars">
-        <p class="add-rating-value">4.0</p>
-        <input type="radio" class="add-rating-radio-btn" value="1" />
-        <input type="radio" class="add-rating-radio-btn" value="2" />
-        <input type="radio" class="add-rating-radio-btn" value="3" />
-        <input type="radio" class="add-rating-radio-btn" value="4" />
-        <input type="radio" class="add-rating-radio-btn" value="5" />
+        <span class="add-rating-value">0</span>
+        <label class="star-radio-btn">
+          <input
+            type="radio"
+            class="add-rating-radio-btn visually-hidden"
+            value="1"
+          />
+          <svg class="icon icon-modal-rating-star" width="24" height="24">
+            <use href="./img/icons.svg#icon-star"></use>
+          </svg>
+        </label>
+        <label class="star-radio-btn">
+          <input
+            type="radio"
+            class="add-rating-radio-btn visually-hidden"
+            value="2"
+          />
+          <svg class="icon icon-modal-rating-star" width="24" height="24">
+            <use href="./img/icons.svg#icon-star"></use>
+          </svg>
+        </label>
+        <label class="star-radio-btn">
+          <input
+            type="radio"
+            class="add-rating-radio-btn visually-hidden"
+            value="3"
+          />
+          <svg class="icon icon-modal-rating-star" width="24" height="24">
+            <use href="./img/icons.svg#icon-star"></use>
+          </svg>
+        </label>
+        <label class="star-radio-btn">
+          <input
+            type="radio"
+            class="add-rating-radio-btn visually-hidden"
+            value="4"
+          />
+          <svg class="icon icon-modal-rating-star" width="24" height="24">
+            <use href="./img/icons.svg#icon-star"></use>
+          </svg>
+        </label>
+        <label class="star-radio-btn">
+          <input
+            type="radio"
+            class="add-rating-radio-btn visually-hidden"
+            value="5"
+          />
+          <svg class="icon icon-modal-rating-star" width="24" height="24">
+            <use href="./img/icons.svg#icon-star"></use>
+          </svg>
+        </label>
       </div>
 
       <input
         type="email"
         class="input-modal add-rating-email"
+        name="email"
+        id="email"
         pattern="^\w+(\.\w+)?@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"
         placeholder="Email"
         required
       />
       <textarea
-        name=""
-        id=""
+        name="comment"
+        id="comment"
         class="input-modal add-rating-comment"
         placeholder="Your comment"
         required
       ></textarea>
-      <button type="submit" class="btn-modal-filled btn-add-rating">
+      <button type="submit" class="btn-modal-filled btn-add-rating-submit">
         Send
       </button>
     </form>

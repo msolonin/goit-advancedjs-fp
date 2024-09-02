@@ -39,7 +39,7 @@ async function LoadModalData(_id) {
 
     AddBtnFavListener();
     
-    modal.classList.toggle("hidden");
+    modal.classList.toggle("visually-hidden");
     OnOpen();
 };
 
@@ -129,16 +129,16 @@ export function LoadListenersForOpenModal() {
 
 // Modal close functions
 btnCloseModal.addEventListener("click", () => {
-    modal.classList.add("hidden");
+    modal.classList.add("visually-hidden");
     OnClose();
 });
 
 modal.addEventListener("click", (event) => {
     let rect = "";
     // If exercise modal window open
-    if (!modalWindow.classList.contains("hidden")) 
+    if (!modalWindow.classList.contains("visually-hidden")) 
         rect = modalWindow.getBoundingClientRect();
-    else if (!modalAddRatingWindow.classList.contains("hidden"))
+    else if (!modalAddRatingWindow.classList.contains("visually-hidden"))
         rect = modalAddRatingWindow.getBoundingClientRect();
 
     if (rect) {
@@ -147,14 +147,14 @@ modal.addEventListener("click", (event) => {
             rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
         if (!isInWindow) {
             // If exercise modal opened
-            if (!modalWindow.classList.contains("hidden")) {
-                modal.classList.add("hidden");
+            if (!modalWindow.classList.contains("visually-hidden")) {
+                modal.classList.add("visually-hidden");
                 OnClose();
             }
             // If Give a rating modal opened
-            else if (!modalAddRatingWindow.classList.contains("hidden") && !giveRatingIsPressed) {
-                modalAddRatingWindow.classList.add("hidden");
-                modalWindow.classList.remove("hidden");
+            else if (!modalAddRatingWindow.classList.contains("visually-hidden") && !giveRatingIsPressed) {
+                modalAddRatingWindow.classList.add("visually-hidden");
+                modalWindow.classList.remove("visually-hidden");
             }
             giveRatingIsPressed = false;
         }
@@ -164,14 +164,14 @@ modal.addEventListener("click", (event) => {
 function escapeKeyDown(event) {
     if (event.key === "Escape") {
         // If exercise modal opened
-        if (!modalWindow.classList.contains("hidden")) {
-            modal.classList.add("hidden");
+        if (!modalWindow.classList.contains("visually-hidden")) {
+            modal.classList.add("visually-hidden");
             OnClose();
         }
         // If Give a rating modal opened
-        else if (!modalAddRatingWindow.classList.contains("hidden")) {
-            modalAddRatingWindow.classList.add("hidden");
-            modalWindow.classList.remove("hidden");
+        else if (!modalAddRatingWindow.classList.contains("visually-hidden")) {
+            modalAddRatingWindow.classList.add("visually-hidden");
+            modalWindow.classList.remove("visually-hidden");
             // OnClose();
         }
     }
@@ -196,9 +196,10 @@ let giveRatingIsPressed = false;
 
 btnOpenRatingModal.addEventListener("click", (event) => {
     giveRatingIsPressed = true;
-    modalAddRatingWindow.classList.remove("hidden");
-    modalWindow.classList.add("hidden");
+    modalAddRatingWindow.classList.remove("visually-hidden");
+    modalWindow.classList.add("visually-hidden");
     OnOpen();
+    LoadRatingModal();
     event.stopImmediatePropagation();
 });
 
@@ -207,12 +208,50 @@ const btnCloseRatingModal = document.querySelector("[data-add-rating-close]");
 
 // Rating modal close functions
 btnCloseRatingModal.addEventListener("click", (event) => {
-    modalAddRatingWindow.classList.add("hidden");
-    modalWindow.classList.remove("hidden");
+    modalAddRatingWindow.classList.add("visually-hidden");
+    modalWindow.classList.remove("visually-hidden");
     // OnClose();
     event.stopImmediatePropagation();
 });
 
+let checkedRating = false;
 function LoadRatingModal() {
-    const radioBtns = document.querySelectorAll("add-rating-radio-btn");
+    checkedRating = false;
+    const radioBtns = document.querySelectorAll(".add-rating-radio-btn");
+    for(let radio of radioBtns) {
+        radio.addEventListener("click", (event) => {
+            checkedRating = true;
+            const rating = event.currentTarget.value;
+            document.querySelector(".add-rating-value").textContent = rating;
+            const stars = document.querySelectorAll(".icon-modal-rating-star");
+            for (let i = 0; i < stars.length; i++) {
+                stars[i].classList.remove("gold");
+                if (i < rating)
+                    stars[i].classList.add("gold");
+            }
+            event.stopImmediatePropagation();
+        });
+    };
 }
+
+// Submit rating button
+const formAddRating = document.querySelector(".add-rating-form");
+
+formAddRating.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const form = event.target;
+    if (!checkedRating)
+        alert("Choose rating");
+    else if (!form.elements.email.value)
+        alert("Enter your email");
+    else if (!form.elements.comment.value)
+        alert("Leave a comment");
+    else {
+        try {
+            ;
+        } catch (error) {
+            alert(`While sending your rating something happend (${error.message})`);
+        }
+    }
+    event.stopImmediatePropagation();
+});

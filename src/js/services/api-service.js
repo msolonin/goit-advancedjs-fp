@@ -11,3 +11,7 @@ export const request = async (path, params) => {
     throw error;
   }
 };
+
+export const post = async (path, params) => {
+  ;
+};
